@@ -1,0 +1,37 @@
+.picture-list {
+    margin-right: -12px;
+    margin-bottom: -16px;
+}
+
+.bui-box {
+    display: block;
+    zoom: 1;
+}
+
+.picture-list .picture-item {
+    margin-right: 12px;
+    margin-bottom: 16px;
+    width: 144px;
+}
+
+.bui-left {
+    float: left;
+}
+
+.picture-list .picture-img {
+    position: relative;
+    width: 144px;
+    height: 84px;
+}
+
+.picture-list .picture-item p {
+    margin-top: 6px;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 18px;
+    height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+}

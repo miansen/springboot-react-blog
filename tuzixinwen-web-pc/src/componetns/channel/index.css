@@ -1,0 +1,13 @@
+.channel-header{
+    background:#fff;
+    text-align:center;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*border-bottom:1px solid #e0e0e0;*/
+}
+
+.channel-menu{
+    display:flex;
+    border-bottom:0px solid #e8e8e8;
+    line-height:60px;
+}

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tuzixinwen.mapper.ArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.tuzixinwen.model.Article">
+        <id column="article_id" jdbcType="INTEGER" property="articleId"/>
+        <result column="channel_name" jdbcType="VARCHAR" property="channelName"/>
+        <result column="theme_name" jdbcType="VARCHAR" property="themeName"/>
+        <result column="site_name" jdbcType="VARCHAR" property="siteName"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="excerpt" jdbcType="VARCHAR" property="excerpt"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="article_url" jdbcType="VARCHAR" property="articleUrl"/>
+        <result column="view_count" jdbcType="INTEGER" property="viewCount"/>
+        <result column="reply_count" jdbcType="INTEGER" property="replyCount"/>
+        <result column="last_reply_author" jdbcType="VARCHAR" property="lastReplyAuthor"/>
+        <result column="last_reply_time" jdbcType="TIMESTAMP" property="lastReplyTime"/>
+        <result column="top" jdbcType="BIT" property="top"/>
+        <result column="good" jdbcType="BIT" property="good"/>
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <result column="show_content" jdbcType="BIT" property="showContent"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="crawler_article_id" jdbcType="INTEGER" property="crawlerArticleId"/>
+        <result column="weight" jdbcType="INTEGER" property="weight"/>
+        <result column="up" jdbcType="INTEGER" property="up"/>
+        <result column="down" jdbcType="INTEGER" property="down"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        article_id, channel_name, theme_name, site_name, title, content, excerpt, author, avatar,
+        article_url, view_count, reply_count, last_reply_author, last_reply_time, top,good, is_delete,
+        show_content,create_date, update_date, weight, up, down
+    </sql>
+
+    <!--不查询文章内容-->
+    <sql id="Base_Column_List2">
+        article_id, channel_name, theme_name, site_name, title, excerpt, author, avatar,
+        article_url, view_count, reply_count, last_reply_author, last_reply_time, top,good, is_delete,
+        show_content,create_date, update_date, weight, up, down
+    </sql>
+
+    <!--根据频道、主题、站点、作者获取文章-->
+    <select id="findArticle" resultType="com.tuzixinwen.model.Article">
+        SELECT
+          a.article_id,
+          a.channel_name,
+          a.theme_name,
+          a.site_name,
+          a.title,
+          a.excerpt,
+          a.author,
+          a.avatar,
+          a.article_url,
+          a.view_count,
+          a.reply_count,
+          a.last_reply_author,
+          a.last_reply_time,
+          a.top,
+          a.good,
+          a.is_delete,
+          a.show_content,
+          a.create_date,
+          a.update_date,
+          a.weight,
+          a.up,a.down,
+          b.user_id "user.userId",
+          b.username "user.username",
+          b.avatar "user.avatar",
+          c.channel_id "channel.channelId",
+          c.channel_name "channel.channelName",
+          c.channel_order "channel.channelOrder"
+        FROM
+          article a
+        LEFT JOIN `user` b on a.author = b.username
+        LEFT JOIN channel c on a.channel_name = c.channel_name
+          <where>
+              <if test="channelName != null">
+                  a.channel_name = #{channelName}
+                  ORDER BY a.create_date desc,a.view_count desc
+              </if>
+              <if test="themeName != null">
+                  a.theme_name = #{themeName}
+                  ORDER BY a.create_date desc,a.view_count desc
+              </if>
+              <if test="siteName != null">
+                  a.site_name = #{siteName}
+                  ORDER BY a.create_date desc,a.view_count desc
+              </if>
+              <if test="author != null">
+                  a.author = #{author}
+                  ORDER BY a.create_date desc,a.view_count desc
+              </if>
+          </where>
+          <if test="pageNo != null">
+              LIMIT #{pageNo}
+              <if test="pageSize != null">
+                  ,#{pageSize}
+              </if>
+          </if>
+    </select>
+
+    <!--随机获取当天的文章-->
+    <select id="findArticleByRand" resultType="com.tuzixinwen.model.Article">
+        SELECT
+          a.article_id,
+          a.channel_name,
+          a.theme_name,
+          a.site_name,
+          a.title,
+          a.excerpt,
+          a.author,
+          a.avatar,
+          a.article_url,
+          a.view_count,
+          a.reply_count,
+          a.last_reply_author,
+          a.last_reply_time,
+          a.top,
+          a.good,
+          a.is_delete,
+          a.show_content,
+          a.create_date,
+          a.update_date,
+          a.weight,
+          a.up,
+          a.down,
+          b.user_id "user.userId",
+          b.username "user.username",
+          b.avatar "user.avatar",
+          c.channel_id "channel.channelId",
+          c.channel_name "channel.channelName",
+          c.channel_order "channel.channelOrder"
+        FROM
+          article a
+        LEFT JOIN `user` b on a.author = b.username
+        LEFT JOIN channel c on a.channel_name = c.channel_name
+        <where>
+            TO_DAYS(a.create_date) = TO_DAYS(NOW())
+        </where>
+        ORDER BY
+          RAND()
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+
+    <!--查询最新的文章-->
+    <select id="findArticleOderByDateDesc" resultType="com.tuzixinwen.model.Article">
+        SELECT
+          <include refid="Base_Column_List2"/>
+        FROM
+          article
+        WHERE
+        channel_name in ('热点','国际','科技','体育','财经','军事','娱乐')
+        ORDER BY
+          create_date desc
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+
+    <!--查询点击次数最多的文章-->
+    <select id="findArticleOderByViewCountDesc" resultType="com.tuzixinwen.model.Article">
+        SELECT
+        <include refid="Base_Column_List2"/>
+        FROM
+        article
+        WHERE
+        channel_name in ('热点','国际','科技','体育','财经','军事','娱乐')
+        AND avatar is not NULL
+        ORDER BY
+        view_count desc
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+
+    <!--查询指定站点的文章-->
+    <select id="findArticleInSite" resultType="com.tuzixinwen.model.Article">
+        SELECT
+          a.article_id,
+          a.channel_name,
+          a.theme_name,
+          a.site_name,
+          a.title,
+          a.excerpt,
+          a.author,
+          a.avatar,
+          a.article_url,
+          a.view_count,
+          a.reply_count,
+          a.last_reply_author,
+          a.last_reply_time,
+          a.top,
+          a.good,
+          a.is_delete,
+          a.show_content,
+          a.create_date,
+          a.update_date,
+          a.weight,
+          a.up,
+          a.down,
+          b.user_id "user.userId",
+          b.username "user.username",
+          b.avatar "user.avatar"
+        FROM
+          article a
+        LEFT JOIN `user` b on a.author = b.username
+        <where>
+              a.site_name in ('V2EX')
+              ORDER BY a.create_date desc,a.view_count desc
+        </where>
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+
+    <!--查询作者的其他文章-->
+    <select id="findAuthorOtherArticle" resultType="com.tuzixinwen.model.Article">
+        SELECT
+        a.article_id,
+        a.channel_name,
+        a.theme_name,
+        a.site_name,
+        a.title,
+        a.excerpt,
+        a.author,
+        a.avatar,
+        a.article_url,
+        a.view_count,
+        a.reply_count,
+        a.last_reply_author,
+        a.last_reply_time,
+        a.top,
+        a.good,
+        a.is_delete,
+        a.show_content,
+        a.create_date,
+        a.update_date,
+        a.weight,
+        a.up,
+        a.down,
+        b.user_id "user.userId",
+        b.username "user.username",
+        b.avatar "user.avatar"
+        FROM
+        article a
+        LEFT JOIN `user` b on a.author = b.username
+        <where>
+            <if test="author != null">
+                a.author = #{author}
+                AND a.article_id != #{currentArticleId}
+                ORDER BY a.create_date desc
+            </if>
+        </where>
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+
+    <!--根据ID查询文章-->
+    <select id="selectById" resultType="com.tuzixinwen.model.Article">
+        SELECT
+          a.article_id,
+          a.channel_name,
+          a.theme_name,
+          a.site_name,
+          a.title,
+          a.content,
+          a.excerpt,
+          a.author,
+          a.avatar,
+          a.article_url,
+          a.view_count,
+          a.reply_count,
+          a.last_reply_author,
+          a.last_reply_time,
+          a.top,
+          a.good,
+          a.is_delete,
+          a.show_content,
+          a.create_date,
+          a.update_date,
+          a.weight,
+          a.up,
+          a.down,
+          b.user_id "user.userId",
+          b.username "user.username",
+          b.avatar "user.avatar"
+        FROM
+          article a
+          LEFT JOIN `user` b on a.author = b.username
+        WHERE
+          article_id = #{id}
+    </select>
+
+    <!--更新文章-->
+    <update id="updateByPrimaryKey" parameterType="com.tuzixinwen.model.Article">
+        UPDATE
+          article
+        SET
+            view_count = #{viewCount},
+            reply_count = #{replyCount},
+            last_reply_author = #{lastReplyAuthor},
+            last_reply_time = #{lastReplyTime},
+            top = #{top},
+            good = #{good},
+            weight = #{weight},
+            up = #{up},
+            down = #{down},
+            update_date = #{updateDate}
+          WHERE
+            article_id = #{articleId}
+    </update>
+
+    <!--根据频道、主题、站点、作者统计文章数量-->
+    <select id="countArticle" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM article
+        <where>
+            <if test="channelName != null">
+                channel_name = #{channelName}
+            </if>
+            <if test="themeName != null">
+                theme_name = #{themeName}
+            </if>
+            <if test="siteName != null">
+                site_name = #{siteName}
+            </if>
+            <if test="author != null">
+                author = #{author}
+            </if>
+        </where>
+    </select>
+
+    <!--统计当天的文章数量-->
+    <select id="countToday" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM article
+        <where>
+            TO_DAYS(create_date) = TO_DAYS(NOW())
+        </where>
+    </select>
+
+    <!--统计指定站点的文章-->
+    <select id="countInSite" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM article
+        <where>
+            site_name in ('V2EX')
+        </where>
+    </select>
+
+</mapper>

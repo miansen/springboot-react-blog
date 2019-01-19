@@ -1,0 +1,135 @@
+.navbar, .sidebar-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.navbar {
+    z-index: 20;
+    right: 0;
+    height: 3.6rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eaecef;
+}
+
+.navbar {
+    padding: .7rem 1.5rem;
+    line-height: 2.2rem;
+    position: relative;
+}
+
+.sidebar-button {
+    display: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    position: absolute;
+    padding: .6rem;
+    top: .6rem;
+    left: 1rem;
+}
+
+.navbar a, .navbar img, .navbar span {
+    display: inline-block;
+}
+
+.navbar .site-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    position: relative;
+}
+
+.navbar .links {
+    padding-left: 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    white-space: nowrap;
+    font-size: .9rem;
+    position: absolute;
+    right: 1.5rem;
+    top: .7rem;
+    display: flex;
+}
+
+.navbar .links .search-box {
+    flex: 0 0 auto;
+    vertical-align: top;
+}
+.search-box {
+    display: inline-block;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.search-box input {
+    cursor: text;
+    width: 10rem;
+    color: #4e6e8e;
+    display: inline-block;
+    border: 1px solid #cfd4db;
+    border-radius: 2rem;
+    font-size: .9rem;
+    line-height: 2rem;
+    padding: 0 .5rem 0 2rem;
+    outline: none;
+    transition: all .2s ease;
+
+    background-size: 1rem;
+}
+
+.navbar .links .nav-links {
+    flex: 1;
+}
+.nav-links {
+    display: inline-block;
+}
+
+.nav-links .nav-item:first-child {
+    margin-left: 0;
+}
+.nav-links .nav-item {
+    position: relative;
+    display: inline-block;
+    margin-left: 1.5rem;
+    line-height: 2rem;
+}
+
+.navbar a, .navbar img, .navbar span {
+    display: inline-block;
+}
+.nav-links a {
+    line-height: 1.4rem;
+    color: inherit;
+}
+
+.fixed-header{
+    border-bottom: 1px solid rgb(232, 232, 232);
+}
+
+.fixed-nav{
+    border-bottom: 1px solid rgb(232, 232, 232);
+}
+
+.fixed-header .header0-nav{
+    margin-left: 15.5%;
+}
+
+.header1-logo {
+    display: inline-block;
+    position: absolute;
+    /*left: 12.5%;*/
+    width: 150px;
+    line-height: 64px;
+}
+
+.top-header .fixed-header {
+    border-bottom: 0px solid rgb(232, 232, 232);
+}
+
+.top-header .ant-layout-header {
+    background: #001529;
+    padding: 0;
+    height: 64px;
+    line-height: 64px;
+}

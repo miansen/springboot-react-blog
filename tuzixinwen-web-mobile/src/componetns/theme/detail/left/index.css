@@ -1,0 +1,25 @@
+.column-wrap {
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    color: #303030;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.column-wrap:before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 21px;
+    background: #f63756;
+    left: 0;
+    top: 14px;
+}
+
+/*
+.column-title{
+    padding-left: 15px;
+}*/

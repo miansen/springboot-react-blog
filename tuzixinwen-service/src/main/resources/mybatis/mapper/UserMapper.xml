@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tuzixinwen.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.tuzixinwen.model.User">
+        <!--用户ID-->
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <!--昵称-->
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <!--密码-->
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <!--邮箱-->
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <!--头像-->
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <!--签名-->
+        <result column="signature" jdbcType="VARCHAR" property="signature"/>
+        <!--用户url-->
+        <result column="user_url" jdbcType="VARCHAR" property="userUrl"/>
+        <!--积分-->
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <!--个人网站-->
+        <result column="website" jdbcType="VARCHAR" property="website"/>
+        <!--1 禁用 0 默认-->
+        <result column="is_block" jdbcType="BIT" property="isBlock"/>
+        <!--1 删除 0 默认-->
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <!--角色-->
+        <result column="role" jdbcType="INTEGER" property="role"/>
+        <!--创建时间-->
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <!--更新时间-->
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <!--备注-->
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, username, password, email, avatar, signature, user_url, score,
+        website, is_block, is_delete, role, create_date, update_date, remark
+    </sql>
+
+    <!--根据用户昵称查询用户-->
+    <select id="findUserByName" resultType="com.tuzixinwen.model.User">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM
+          user
+        WHERE
+          username = #{name}
+        AND
+          is_delete = 0
+    </select>
+
+    <!--查询发表文章数量最多的用户-->
+    <select id="findUserByArticleCountDesc" resultType="com.tuzixinwen.model.User">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM
+          user a
+        WHERE
+          EXISTS (
+            SELECT
+              b.author,
+              COUNT(1) count
+            FROM
+              article b
+            WHERE
+              b.author != ''
+            AND
+              a.username = b.author
+            GROUP BY
+              b.author
+            ORDER BY
+              count DESC
+          )
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+.pane-module .module-head {
+    color: #333;
+    padding: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pane-module .column-wrap{
+    margin-top: 0px;
+}

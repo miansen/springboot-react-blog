@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tuzixinwen.mapper.SiteMapper">
+    <resultMap id="BaseResultMap" type="com.tuzixinwen.model.Site">
+        <!--站点ID-->
+        <id column="site_id" jdbcType="INTEGER" property="siteId"/>
+        <!--站点编码-->
+        <result column="site_code" jdbcType="VARCHAR" property="siteCode"/>
+        <!--频道名称-->
+        <result column="channel_name" jdbcType="VARCHAR" property="channelName"/>
+        <!--站点名称-->
+        <result column="site_name" jdbcType="VARCHAR" property="siteName"/>
+        <!--站点url-->
+        <result column="site_url" jdbcType="VARCHAR" property="siteUrl"/>
+        <!--站点描述-->
+        <result column="site_desc" jdbcType="VARCHAR" property="siteDesc"/>
+        <!--头像-->
+        <result column="avatar_normal" jdbcType="VARCHAR" property="avatarNormal"/>
+        <!--小头像-->
+        <result column="avatar_mini" jdbcType="VARCHAR" property="avatarMini"/>
+        <!--背景图片-->
+        <result column="avatar_large" jdbcType="VARCHAR" property="avatarLarge"/>
+        <!--1 删除 0 默认-->
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <!--创建时间-->
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <!--更新时间-->
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        site_id, site_code, channel_name, site_name, site_url, site_desc, avatar_normal, avatar_mini,
+        avatar_large, is_delete, create_date, update_date
+    </sql>
+    <!--查询所有站点-->
+    <select id="findSiteAll" resultType="com.tuzixinwen.model.Site">
+        SELECT
+          site_id,
+          site_code,
+          site_name,
+          site_url,
+          site_desc,
+          avatar_normal
+        FROM
+          site
+        WHERE
+          is_delete = 0
+        ORDER BY
+          create_date desc
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+</mapper>

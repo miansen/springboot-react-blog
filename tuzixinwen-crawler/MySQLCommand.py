@@ -13,15 +13,10 @@ logger = Logger()
 class MySQLCommand(object):
     # 初始化
     def __init__(self):
-        # self.host = 'localhost'
-        # self.port = 3306
-        # self.user = 'sen'
-        # self.password = '123'
-        # self.db = 'kxw'
-        self.host = '120.79.94.184'
+        self.host = 'localhost'
         self.port = 3306
-        self.user = 'root'
-        self.password = 'Ms@972383371'
+        self.user = 'sen'
+        self.password = '123'
         self.db = 'kxw'
 
     # 连接数据库

@@ -14,16 +14,16 @@ logger = Logger()
 class OSSCommand(object):
 
     def __init__(self):
-        self.AccessKeyId = 'LTAIwVzy13YVX9Do'
-        self.AccessKeySecret = 'dSTHO0nabsxSsJs9HHw0qTDrEFswqq'
-        self.Endpoint = 'http://oss-cn-shenzhen.aliyuncs.com'
-        self.BucketName = 'tuzixinwen'
+        self.AccessKeyId = ''
+        self.AccessKeySecret = ''
+        self.Endpoint = ''
+        self.BucketName = ''
 
     # 连接OSS
     def connectOSS(self):
         try:
             auth = oss2.Auth(self.AccessKeyId, self.AccessKeySecret)
-            self.bucket = oss2.Bucket(auth, 'http://oss-cn-shenzhen.aliyuncs.com', 'tuzixinwen')
+            self.bucket = oss2.Bucket(auth, self.Endpoint, self.BucketName)
         except Exception as e:
             logger.getErrorLog('OSSCommand-upload-上传OSS失败,原因：%s' % (e))
 

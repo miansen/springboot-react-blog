@@ -1,6 +1,6 @@
 site:
   # 配置跨域域名
-  corsDomain: ["https://www.tuzixinwen.com","https://m.tuzixinwen.com","http://localhost:3000"]
+  corsDomain: ["https://www.tuzixinwen.com","https://m.tuzixinwen.com","http://localhost:3000","http://localhost:3001"]
   # 每页显示条数
   pageSize: 20
   createTopicScore: 10

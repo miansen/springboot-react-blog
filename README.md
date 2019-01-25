@@ -50,7 +50,7 @@ web模块和service模块是配套使用的，crawler模块独立运行。
 
 4.修改数据源配置
 
-数据源配置文件位于tuzixinwen-service模块下的静态资源目录（resources）下
+数据源配置文件`application.yml`位于tuzixinwen-service模块下的静态资源目录（resources）下
 
 ```
 spring:

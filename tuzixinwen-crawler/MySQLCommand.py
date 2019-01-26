@@ -5,19 +5,21 @@
 
 import pymysql
 import datetime
+import configparser
 from Logger import *
 
 logger = Logger()
-
+conf = configparser.ConfigParser()
+conf.read('application.cfg')
 # 数据库操作
 class MySQLCommand(object):
     # 初始化
     def __init__(self):
-        self.host = 'localhost'
-        self.port = 3306
-        self.user = 'sen'
-        self.password = '123'
-        self.db = 'kxw'
+        self.host = conf.get('db', 'host')
+        self.port = int(conf.get('db', 'port'))
+        self.user = conf.get('db', 'user')
+        self.password = conf.get('db', 'password')
+        self.db = conf.get('db', 'db')
 
     # 连接数据库
     def connectMysql(self):

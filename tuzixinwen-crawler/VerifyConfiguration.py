@@ -163,6 +163,6 @@ class VerifyConfiguration(object):
 
 if __name__ == '__main__':
     verifyConfiguration = VerifyConfiguration()
-    result = verifyConfiguration.verifyUrl(73)
+    result = verifyConfiguration.verifyUrl(1)
     #print(result)
-    verifyConfiguration.verifySelector(result,73)
+    verifyConfiguration.verifySelector(result,1)

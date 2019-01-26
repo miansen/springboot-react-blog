@@ -1,0 +1,6 @@
+BeautifulSoup
+request
+chardet
+pymysql
+oss2
+requests

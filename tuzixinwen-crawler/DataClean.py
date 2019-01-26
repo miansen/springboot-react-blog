@@ -113,16 +113,18 @@ class DataClean(object):
                         attr = mySQLCommand.queryArticleAvatarImgAttrSelectorByHtmlId(html_id)
                         for item in imgList:
                             # print(item['src'])
-                            imgURL = item[attr[0]] # 图片URL
-                            if imgURL :
-                                if imgURL.startswith("//"):
-                                    imgURL = "http:"+imgURL
-                                elif not imgURL.startswith("http"):
-                                    imgURL = attr[1]+imgURL
-                            # 这里替换的还是'src'
-                            article_avatar = 'images/article/%s/%s.jpg' % (datetime.datetime.now().strftime('%Y/%m/%d'),int(round(time.time()*1000)))
-                            oSSCommand.upload(imgURL,article_avatar) # 上传文章头图
                             try:
+                                imgURL = item[attr[0]] # 图片URL
+                                if imgURL :
+                                    if imgURL.startswith("//"):
+                                        imgURL = "http:"+imgURL
+                                    elif not imgURL.startswith("http"):
+                                        imgURL = attr[1]+imgURL
+                                else:
+                                    continue
+                                article_avatar = 'images/article/%s/%s.jpg' % (datetime.datetime.now().strftime('%Y/%m/%d'),int(round(time.time()*1000)))
+                                oSSCommand.upload(imgURL,article_avatar) # 上传文章头图
+                                # 这里替换的还是'src'
                                 content = content.replace(item['src'],"https://static.tuzixinwen.com/%s" % (article_avatar)) # 替换图片链接
                             except KeyError:
                                 continue

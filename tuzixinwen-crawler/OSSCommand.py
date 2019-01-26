@@ -7,17 +7,20 @@ import oss2
 import requests
 import datetime
 import time
+import configparser
 from Logger import *
 
 logger = Logger()
+conf = configparser.ConfigParser()
+conf.read('application.cfg')
 
 class OSSCommand(object):
 
     def __init__(self):
-        self.AccessKeyId = ''
-        self.AccessKeySecret = ''
-        self.Endpoint = ''
-        self.BucketName = ''
+        self.AccessKeyId = conf.get('oss', 'AccessKeyId')
+        self.AccessKeySecret = conf.get('oss', 'AccessKeySecret')
+        self.Endpoint = conf.get('oss', 'Endpoint')
+        self.BucketName = conf.get('oss', 'BucketName')
 
     # 连接OSS
     def connectOSS(self):

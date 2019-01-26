@@ -82,7 +82,7 @@ class DataCrawler(object):
                     # html = html.decode("UTF-8")  # 设置抓取到的html的编码方式
                     soup = BeautifulSoup(html, 'html.parser')  # 前一个参数为要解析的文本，后一个参数为解析模型
 
-                    # 标题
+                    # 标题 当标题为空时，退出当前循环
                     try:
                         if item[5]:
                             title = soup.select(item[5])
@@ -90,9 +90,9 @@ class DataCrawler(object):
                             if len(title):
                                 title = soup.select(item[5])[0].get_text().strip()
                             else:
-                                title = ''
+                                continue
                         else:
-                            title = ''
+                            continue
                     except Exception as e:
                         # raise ('标题配置出错: %s' % item[5])
                         logger.getErrorLog("标题配置出错 %s" % item[5])

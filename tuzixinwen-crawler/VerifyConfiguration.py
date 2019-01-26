@@ -72,9 +72,9 @@ class VerifyConfiguration(object):
                             if len(title):
                                 title = soup.select(item[4])[0].get_text().strip()
                             else:
-                                title = ''
+                                continue
                         else:
-                            title = ''
+                            continue
                     except Exception as e:
                         logger.getErrorLog("标题配置出错 %s" % item[4])
 
@@ -163,6 +163,6 @@ class VerifyConfiguration(object):
 
 if __name__ == '__main__':
     verifyConfiguration = VerifyConfiguration()
-    result = verifyConfiguration.verifyUrl(1)
+    result = verifyConfiguration.verifyUrl(54)
     #print(result)
-    verifyConfiguration.verifySelector(result,1)
+    verifyConfiguration.verifySelector(result,54)

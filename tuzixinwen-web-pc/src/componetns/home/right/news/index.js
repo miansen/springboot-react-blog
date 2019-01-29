@@ -47,7 +47,7 @@ class News extends Component{
                     {
                         this.state.article.length > 0 ?
                             <div className="pane-module">
-                                <div className="column-wrap"><span>热门新闻</span></div>
+                                <div className="column-wrap"><span>热门文章</span></div>
                                 <ul className="module-content article-list">
                                     {
                                         this.state.article.map(function (v,i) {

@@ -32,7 +32,7 @@
     font-size: 20px;
     line-height: 1.3;
     margin-bottom: 4px;
-    /*font-weight: 700;*/
+    font-weight: 700;
     max-height: 52px;
     display: -webkit-box;
     -webkit-line-clamp: 2;

@@ -1,3 +1,6 @@
+.basic-header{
+    border-bottom: 1px solid #f0f0f0;
+}
 .navbar, .sidebar-mask {
     position: fixed;
     top: 0;

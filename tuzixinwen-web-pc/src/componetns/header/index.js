@@ -51,13 +51,13 @@ export default class Header extends Component {
         const pathname = this.props.path; //获取当前路由
         // console.log("当前路由："+pathname)
         return (
-            <div className={this.state.scrollTop > 500 && pathname === "/" ? "top-header" : "basic-header"}>
+            <div className="basic-header">
                 {
-                    this.state.scrollTop > 500 && pathname === "/" ?
+                    /*this.state.scrollTop > 500 && pathname === "/" ?
                         <TopHeader className="fixed-header" style={{ position: 'fixed', zIndex: 1, width: '100%', background: "#ffffff"}}>
                             <Nav02 id="nav_0_0" key="nav_0_0" isMobile={false} style={{borderBottom: "1px solid rgb(232, 232, 232)"}}/>
                         </TopHeader>
-                        :
+                        :*/
                         <div className="templates-wrapper basic-header">{this.state.show && children}</div>
                 }
             </div>

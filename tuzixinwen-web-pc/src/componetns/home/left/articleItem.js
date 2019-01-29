@@ -97,7 +97,7 @@ class ArticleItem extends Component{
                                                         :
                                                         null
                                                 }
-                                                <Icon type="like" />
+                                                <Link to="#"><Icon type="like" /></Link>
                                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                 <Link to={"/article/"+v.articleId} target="_blank" className="comment"><Icon type="message" /></Link>
                                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>

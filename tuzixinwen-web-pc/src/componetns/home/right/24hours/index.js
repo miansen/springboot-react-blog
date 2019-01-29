@@ -42,7 +42,7 @@ class Hours24 extends Component{
                     {
                         this.state.article.length > 0 ?
                             <div className="pane-module">
-                                <div className="column-wrap"><span>24小时</span></div>
+                                <div className="column-wrap"><span>最新文章</span></div>
                                 <div className="home__right home-daily">
                                     <div className="home-daily__container" id="js-daily-container">
                                         <div className="home-daily__items">

@@ -141,11 +141,11 @@
           article a
         LEFT JOIN `user` b on a.author = b.username
         LEFT JOIN channel c on a.channel_name = c.channel_name
-        <where>
+        <!--<where>
             TO_DAYS(a.create_date) = TO_DAYS(NOW())
-        </where>
+        </where>-->
         ORDER BY
-          RAND()
+          a.weight DESC ,a.create_date DESC
         <if test="pageNo != null">
             LIMIT #{pageNo}
             <if test="pageSize != null">
@@ -357,9 +357,9 @@
     <!--统计当天的文章数量-->
     <select id="countToday" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM article
-        <where>
+        <!--<where>
             TO_DAYS(create_date) = TO_DAYS(NOW())
-        </where>
+        </where>-->
     </select>
 
     <!--统计指定站点的文章-->

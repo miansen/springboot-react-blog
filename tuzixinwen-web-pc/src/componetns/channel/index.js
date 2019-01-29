@@ -25,12 +25,12 @@ class Channel extends Component{
     }
 
     //渲染前加载
-    /*componentWillMount(){
+    componentWillMount(){
         this.fetchData();
-    }*/
+    }
 
     //获取频道列表
-    /*fetchData(){
+    fetchData(){
         if(this.state.channel.length === 0 || this.state.loading){
             Axios.get('/channels').then(({data}) => {
                 // console.log(data);
@@ -46,7 +46,7 @@ class Channel extends Component{
                 {openNotificationWithIcon("error","Error",error.message)}
             })
         }
-    }*/
+    }
 
     //更新频道
     updateChannel(channelName){
@@ -60,7 +60,7 @@ class Channel extends Component{
     }
 
     render() {
-        const navData =
+        /*const navData =
             {   menu0: '推荐',
                 menu1: '热点',
                 meun2: '国际',
@@ -78,9 +78,9 @@ class Channel extends Component{
                 menu14:  "汽车",
                 menu15:  "生活",
                 menu16:  "文化",
-            };
-        const NavChannel = Object.keys(navData).map((key,i) => (
-            <Item key={i} onClick={() => this.updateChannel(navData[key])}>{navData[key]}</Item>
+            };*/
+        const NavChannel = this.state.channel.map((key,i) => (
+            <Item key={i} onClick={() => this.updateChannel(key.channelName)}>{key.channelName}</Item>
         ))
         // 频道排序，用于显示点击后的样式
         const channelOrder = this.props.state.index.channelOrder;

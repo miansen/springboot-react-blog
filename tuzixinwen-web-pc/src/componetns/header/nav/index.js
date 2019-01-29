@@ -82,7 +82,8 @@ class Nav extends React.Component {
         const props = { ...this.props };
         const isMobile = props.isMobile;
         delete props.isMobile;
-        const navData = { menu0: '首页', menu1: '主题', menu2: '站点', menu3: '登录' };
+        // const navData = { menu0: '首页', menu1: '主题', menu2: '站点', menu3: '登录' };
+        const navData = { menu3: '登录' };
         const navChildren = Object.keys(navData)
             .map((key, i) => {
                 // console.log("key:"+key);
@@ -129,7 +130,7 @@ class Nav extends React.Component {
                     className={`${this.props.className}-phone-nav-text`}
                 >
                     <Menu
-                        defaultSelectedKeys={['0']}
+                        /*defaultSelectedKeys={['0']}*/
                         mode="inline"
                         theme={this.state.theme}
                     >
@@ -141,7 +142,8 @@ class Nav extends React.Component {
                 animation={{ x: 30, type: 'from', ease: 'easeOutQuad' }}
             >
                 <Menu
-                    mode="horizontal" defaultSelectedKeys={['0']}
+                    mode="horizontal"
+                    /*defaultSelectedKeys={['0']}*/
                     id={`${this.props.id}-menu`}
                 >
                     {navChildren}

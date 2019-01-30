@@ -22,6 +22,7 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <DefaultLayout exact path='/' component={IndexHome} />
+                <DefaultLayout path='/channel/:channelName' component={IndexHome} />
                 <DefaultLayout path='/themes' component={ThemeHome} />
                 <DefaultLayout path='/sites' component={SiteHome} />
                 <DefaultLayout path='/article/:id' component={ArticleHome} />

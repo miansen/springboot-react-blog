@@ -19,8 +19,15 @@ import './index.css';
 class IndexHome extends Component{
 
     render() {
-        // const pathname = this.props.location.pathname;
+        // 获取当前路由
+        const pathname = this.props.location.pathname;
         // console.log("home当前路由："+pathname)
+
+        // 获取路由中的可变参数
+        const channelName2 = this.props.match.params.channelName;
+        // console.log("当前路由中的可变参数："+typeof (channelName2) == undefined ? null : channelName2)
+
+        // 获取当前点击的频道
         const channelName = this.props.state.index.channelName === "推荐" ? null : this.props.state.index.channelName;
         return (
             <div className="content">

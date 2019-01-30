@@ -29,18 +29,18 @@ export default class Header extends Component {
         });
 
         //监听滚轮
-        window.addEventListener('scroll',() => {
+        /*window.addEventListener('scroll',() => {
             //var header = this.refs.header
             let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-            /*if(scrollTop > 100){
+            /!*if(scrollTop > 100){
                 console.log("滚轮大于100")
             }else{
                 console.log("滚轮小于100")
-            }*/
+            }*!/
             this.setState({
                 scrollTop: scrollTop
             });
-        })
+        })*/
     }
 
     render() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TweenOne from 'rc-tween-one';
@@ -55,6 +56,10 @@ class Nav extends React.Component {
         }
     }
 
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
+    }
+
     //切换频道
     updateChannel(channelName){
         const data = {
@@ -64,6 +69,21 @@ class Nav extends React.Component {
 
         }
         this.props.updateChannelAndLoadData(data);
+        // 切换频道的同时跳转到首页
+        this.context.router.history.push('/')
+    }
+
+    //回到首页
+    goToIndex(){
+        const data = {
+            url: "/channel/articles",
+            channelName: "推荐",
+            pageNo:1
+
+        }
+        this.props.updateChannelAndLoadData(data);
+        // 跳转到首页
+        this.context.router.history.push('/')
     }
 
     //显示登录窗口
@@ -159,14 +179,15 @@ class Nav extends React.Component {
                 animation={{ x: -30, type: 'from', ease: 'easeOutQuad' }}
                 id={`${this.props.id}-logo`}
             >
-                <Link to="/">
+                <a onClick={() => this.goToIndex()}>
                     <img width="100%" src="https://static.tuzixinwen.com/images/logo-15.png" />
-                </Link>
+                </a>
             </TweenOne>
             <div className="header1-nav">
+                <a onClick={() => this.goToIndex()} style={{paddingRight: "20px"}}>首页</a>
                 <Dropdown overlay={menu} placement="bottomCenter">
                     <a className="ant-dropdown-link" href="#">
-                        分类浏览<Icon type="down" />
+                        领域<Icon type="caret-down" />
                     </a>
                 </Dropdown>
             </div>

@@ -24,8 +24,7 @@ class IndexHome extends Component{
         const channelName = this.props.state.index.channelName === "推荐" ? null : this.props.state.index.channelName;
         return (
             <div className="content">
-
-                <Channel/>
+                {/*<Channel/>*/}
                 {channelName ? null : <Banner/>}
                 <Row>
                     <Col xs={24} sm={24} md={24} lg={15} xl={15} xxl={15}>

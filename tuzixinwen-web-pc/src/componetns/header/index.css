@@ -136,3 +136,19 @@
     height: 64px;
     line-height: 64px;
 }
+
+.header1-nav {
+    display: inline-block;
+    position: absolute;
+    left: 25.5%;
+    width: 150px;
+    line-height: 64px;
+}
+
+.header1-nav a {
+    color: #333;
+}
+
+.header1-nav a:hover {
+    color: #ed4040;
+}

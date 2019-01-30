@@ -2,11 +2,15 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TweenOne from 'rc-tween-one';
-import { Menu } from 'antd';
+import { Menu,Dropdown, Icon,Button } from 'antd';
 
 import './index.less';
 import Login from "../../login";
 import Logo from '../../../assets/images/logo.png';
+import Axios from "../../../axios/axios";
+import {openNotificationWithIcon} from "../../notification";
+import {updateChannelAndLoadData} from '../../../redux/index/action';
+import connect from "react-redux/es/connect/connect";
 
 const Item = Menu.Item;
 
@@ -19,6 +23,7 @@ class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            channel: [],
             phoneOpen: false, //是否打开导航菜单
             theme: "light ", //导航菜单的主题颜色
             visible: false, //登录窗口是否可见
@@ -26,6 +31,40 @@ class Nav extends React.Component {
         };
     }
 
+    //渲染前加载
+    componentWillMount(){
+        this.fetchData();
+    }
+
+    //获取频道列表
+    fetchData(){
+        if(this.state.channel.length === 0 || this.state.loading){
+            Axios.get('/channels').then(({data}) => {
+                // console.log(data);
+                if(data.code === 200){
+                    this.setState({
+                        loading: false,
+                        channel: data.detail
+                    })
+                }else {
+                    {openNotificationWithIcon("error","Error",data.description)}
+                }
+            }).catch( error => {
+                {openNotificationWithIcon("error","Error",error.message)}
+            })
+        }
+    }
+
+    //切换频道
+    updateChannel(channelName){
+        const data = {
+            url: "/channel/articles",
+            channelName: channelName,
+            pageNo:1
+
+        }
+        this.props.updateChannelAndLoadData(data);
+    }
 
     //显示登录窗口
     showModal = (e) => {
@@ -79,11 +118,23 @@ class Nav extends React.Component {
     }
 
     render() {
+        // 频道列表
+        const menu = (
+            <Menu>
+                {
+                    this.state.channel.map((key,i) => (
+                        <Menu.Item>
+                            <a onClick={() => this.updateChannel(key.channelName)}>{key.channelName}</a>
+                        </Menu.Item>
+                    ))
+                }
+            </Menu>
+        );
         const props = { ...this.props };
         const isMobile = props.isMobile;
         delete props.isMobile;
         // const navData = { menu0: '首页', menu1: '主题', menu2: '站点', menu3: '登录' };
-        const navData = { menu3: '登录' };
+        const navData = { menu3: '登录',menu4: '注册'};
         const navChildren = Object.keys(navData)
             .map((key, i) => {
                 // console.log("key:"+key);
@@ -112,6 +163,13 @@ class Nav extends React.Component {
                     <img width="100%" src="https://static.tuzixinwen.com/images/logo-15.png" />
                 </Link>
             </TweenOne>
+            <div className="header1-nav">
+                <Dropdown overlay={menu} placement="bottomCenter">
+                    <a className="ant-dropdown-link" href="#">
+                        分类浏览<Icon type="down" />
+                    </a>
+                </Dropdown>
+            </div>
             {isMobile ? (<div
                 className={`${this.props.className}-phone-nav${this.state.phoneOpen ? ' open' : ''}`}
                 id={`${this.props.id}-menu`}
@@ -170,4 +228,9 @@ Nav.defaultProps = {
     className: 'header0',
 };
 
-export default Nav;
+export default connect(
+    state => ({
+        state: state
+    }),
+    {updateChannelAndLoadData: updateChannelAndLoadData}
+)(Nav)

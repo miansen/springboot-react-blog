@@ -48,7 +48,7 @@ class Channel extends Component{
         }
     }
 
-    //更新频道
+    //切换频道
     updateChannel(channelName){
         const data = {
             url: "/channel/articles",

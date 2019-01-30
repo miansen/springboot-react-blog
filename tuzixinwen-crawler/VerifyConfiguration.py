@@ -144,7 +144,7 @@ class VerifyConfiguration(object):
                         if item[9]:
                             excerpt = soup.select(item[9])
                             if len(excerpt):
-                                excerpt = soup.select(item[9])[0]
+                                excerpt = soup.select(item[9])[0].get_text()[0:200].replace("\n", "")
                             else:
                                 excerpt = ''
                         else:
@@ -153,7 +153,7 @@ class VerifyConfiguration(object):
                         logger.getErrorLog("摘录配置出错", e)
 
                     print("标题：",title,"\nURL：",url,"\n作者：",author,"\n头像：",
-                          user_avatar,"\n头图：",article_avatar,"\n正文（长度）：",len(content),
+                          user_avatar,"\n头图：",article_avatar,"\n正文（长度）：",content,
                           "\n摘录：",excerpt,"\n频道：",item[10],"\n主题：",'' if item[11] is None else item[11],"\n站点：",'' if item[12] is None else item[12])
                     print("-------------------------------------------------------------------------------------------------------")
                     page.close()
@@ -163,6 +163,6 @@ class VerifyConfiguration(object):
 
 if __name__ == '__main__':
     verifyConfiguration = VerifyConfiguration()
-    result = verifyConfiguration.verifyUrl(54)
+    result = verifyConfiguration.verifyUrl(76)
     #print(result)
-    verifyConfiguration.verifySelector(result,54)
+    verifyConfiguration.verifySelector(result,76)

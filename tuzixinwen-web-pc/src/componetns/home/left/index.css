@@ -41,6 +41,14 @@
 }
 
 .excerpt {
+    /*font-size: 16px;*/
+    line-height: 1.8;
+    margin-bottom: 4px;
+    max-height: 52px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding-bottom: 5px;
 }
 
@@ -74,7 +82,7 @@
     text-align: center;
 }
 
-.media-body:before {
+/*.media-body:before {
     content: "";
     width: 0;
     font-size: 0;
@@ -82,7 +90,7 @@
     visibility: hidden;
     display: inline-block;
     vertical-align: middle;
-}
+}*/
 
 .comment{
     color: #999;

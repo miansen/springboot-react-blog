@@ -159,12 +159,12 @@ class DataCrawler(object):
                     except Exception as e:
                         logger.getErrorLog("正文配置出错", e)
 
-                    # 摘录
+                    # 摘录 默认取正文的200个字符并去掉换行
                     try:
                         if item[11]:
                             excerpt = soup.select(item[11])
                             if len(excerpt):
-                                excerpt = soup.select(item[11])[0]
+                                excerpt = soup.select(item[11])[0].get_text()[0:200].replace("\n", "")
                             else:
                                 excerpt = ''
                         else:

@@ -31,7 +31,7 @@ class UserDetailHome extends Component{
                                     <img src={avatar} className="avatar-lg img-circle" alt=""/>
                                 </div>
                                 <div className="media-body user-body">
-                                    <h3 style={{marginTop: "0"}} className="user-info username">{this.props.match.params.username}</h3>
+                                    <h3 style={{marginTop: "10px"}} className="user-info username">{this.props.match.params.username}</h3>
                                 </div>
                             </div>
                         </div>

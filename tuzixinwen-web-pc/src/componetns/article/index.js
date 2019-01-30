@@ -41,14 +41,14 @@ class ArticleHome extends Component{
         const article = this.state.article;
         return (
            <Row>
-               <Col xs={0} sm={0} md={0} lg={1} xl={1} xxl={1}></Col>
-               <Col xs={24} sm={24} md={24} lg={14} xl={14} xxl={14}>
+               <Col xs={0} sm={0} md={0} lg={4} xl={4} xxl={4}></Col>
+               <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>
                    <div className="wrap-left pull-left">
                        <ArticleDetail id={this.props.match.params.id} article={this.state.article}/>
                    </div>
                </Col>
-               <Col xs={0} sm={0} md={0} lg={2} xl={2} xxl={2}></Col>
-               <Col xs={24} sm={24} md={24} lg={7} xl={7} xxl={7}>
+
+               <Col xs={24} sm={24} md={24} lg={4} xl={4} xxl={4}>
                    <div className="wrap-right pull-right">
                        {/*<AuthorInfo user={this.state.user}/>*/}
                        {/*<AuthorOtherArticle user={this.state.user} id={this.props.match.params.id}/>*/}

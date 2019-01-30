@@ -1,6 +1,6 @@
 .panel-body {
     position: relative;
-    height: 50px;
+    /*height: 50px;*/
     /* line-height: 50px; */
     /* font-size: 24px; */
     color: #303030;
@@ -32,7 +32,7 @@ h3{
     content: '';
     position: absolute;
     width: 4px;
-    height: 54px;
+    height: 84px;
     background: #f63756;
     left: 0;
     top: 14px;

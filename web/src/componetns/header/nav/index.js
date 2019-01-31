@@ -3,14 +3,15 @@ import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TweenOne from 'rc-tween-one';
-import { Menu,Dropdown, Icon,Button } from 'antd';
+import { Menu,Dropdown, Icon,Button,Avatar } from 'antd';
 
 import './index.less';
 import Login from "../../login";
-import Logo from '../../../assets/images/logo.png';
+import Register from '../../register/index';
 import Axios from "../../../axios/axios";
 import {openNotificationWithIcon} from "../../notification";
 import {updateChannelAndLoadData} from '../../../redux/index/action';
+import {loginAsync,RegisterAsync,logout} from '../../../redux/user/action';
 import connect from "react-redux/es/connect/connect";
 
 const Item = Menu.Item;
@@ -28,7 +29,7 @@ class Nav extends React.Component {
             phoneOpen: false, //是否打开导航菜单
             theme: "light ", //导航菜单的主题颜色
             visible: false, //登录窗口是否可见
-            isNameOrPassErr: false //账号或者密码是否错误
+            visibleRegister: false //注册窗口是否可见
         };
     }
 
@@ -93,11 +94,25 @@ class Nav extends React.Component {
         });
     }
 
+    //显示注册窗口
+    showModalRegister = (e) => {
+        this.setState({
+            visibleRegister: true
+        });
+    }
+
     //关闭登录窗口
     handleCancel = () => {
         this.setState({
             visible: false,
             isNameOrPassErr: false
+        });
+    }
+
+    //关闭注册窗口
+    handleCancelRegister = () => {
+        this.setState({
+            visibleRegister: false,
         });
     }
 
@@ -111,23 +126,54 @@ class Nav extends React.Component {
             if (err) {
                 return;
             }
-
             console.log('Received values of form: ', values);
             form.resetFields();
-            if(values.username == 'admin' && values.password == '123'){
-                this.setState({
-                    visible: false
-                });
-            }else{
-                this.setState({
-                    isNameOrPassErr: true
-                });
-            }
+            const username = values.username;
+            const password = values.password;
+            this.props.loginAsync({username: username,password: password});
+            this.setState({
+                visible: false
+            });
         });
+    }
+
+    /**
+     * 点击注册按钮的事件
+     * values:输入对象，包含用户名和密码
+     */
+    handleCreateRegister = () => {
+        const form = this.formRefRegister.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
+            form.resetFields();
+            const username = values.username;
+            const password = values.password;
+            const email = values.email;
+            this.props.registerAsync({username: username,password: password,email: email});
+            this.setState({
+                visibleRegister: false
+            });
+        });
+    }
+
+    // 登出
+    logout = () => {
+        if (window.confirm('确定要登出吗？')) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("username");
+            localStorage.removeItem("avatar");
+            this.props.logout();
+        }
     }
 
     saveFormRef = (formRef) => {
         this.formRef = formRef;
+    }
+
+    saveFormRefRegister = (formRef) => {
+        this.formRefRegister = formRef;
     }
 
     //移动设备下打开导航菜单
@@ -138,6 +184,7 @@ class Nav extends React.Component {
     }
 
     render() {
+        console.log("登录用户名："+this.props.state.user.loginUsername)
         // 频道列表
         const menu = (
             <Menu>
@@ -150,6 +197,12 @@ class Nav extends React.Component {
                 }
             </Menu>
         );
+        // 用户选项
+        const userMenu = <Menu>
+            <Menu.Item>
+                <a onClick={this.logout}>登出</a>
+            </Menu.Item>
+        </Menu>;
         const props = { ...this.props };
         const isMobile = props.isMobile;
         delete props.isMobile;
@@ -160,8 +213,8 @@ class Nav extends React.Component {
                 // console.log("key:"+key);
                 if(key == 'menu3'){
                     return (<Item key={i} onClick={this.showModal}>{navData[key]}</Item>)
-                }else if(key == 'menu1'){
-                    return (<Item key={i}><Link to="/themes">{navData[key]}</Link></Item>)
+                }else if(key == 'menu4'){
+                    return (<Item key={i} onClick={this.showModalRegister}>{navData[key]}</Item>)
                 }else if(key == 'menu2'){
                     return (<Item key={i}><Link to="/sites">{navData[key]}</Link></Item>)
                 }else{
@@ -208,31 +261,61 @@ class Nav extends React.Component {
                 <div
                     className={`${this.props.className}-phone-nav-text`}
                 >
-                    <Menu
-                        /*defaultSelectedKeys={['0']}*/
-                        mode="inline"
-                        theme={this.state.theme}
-                    >
-                        {navChildren}
-                    </Menu>
+                    {
+                        this.props.state.user.loginUsername ?
+                            <Menu
+                                mode="inline"
+                                theme={this.state.theme}
+                            >
+                                <Item key="0">{this.props.state.user.loginUsername}</Item>
+                                <Item key="1" onClick={this.logout}>登出</Item>
+                            </Menu>
+
+                            :
+                            <Menu
+                                mode="inline"
+                                theme={this.state.theme}
+                            >
+                                {navChildren}
+                            </Menu>
+                    }
                 </div>
             </div>) : (<TweenOne
                 className={`${this.props.className}-nav`}
                 animation={{ x: 30, type: 'from', ease: 'easeOutQuad' }}
             >
-                <Menu
-                    mode="horizontal"
-                    /*defaultSelectedKeys={['0']}*/
-                    id={`${this.props.id}-menu`}
-                >
-                    {navChildren}
-                </Menu>
+                {
+                    this.props.state.user.loginUsername ?
+                        <Menu
+                            mode="horizontal"
+                            theme={this.state.theme}
+                        >
+                            <Dropdown overlay={userMenu} placement="bottomCenter">
+                                <a className="ant-dropdown-link" href="#" style={{padding: "0 10px"}}>
+                                    <Avatar size={30} src={this.props.state.user.loginAvatar} key="0"/>
+                                </a>
+                            </Dropdown>
+                        </Menu>
+
+                        :
+                        <Menu
+                            mode="horizontal"
+                            theme={this.state.theme}
+                        >
+                            {navChildren}
+                        </Menu>
+                }
                 <Login
                     wrappedComponentRef={this.saveFormRef}
                     visible={this.state.visible}
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
-                    isNameOrPassErr={this.state.isNameOrPassErr}
+                />
+                <Register
+                    wrappedComponentRef={this.saveFormRefRegister}
+                    visible={this.state.visibleRegister}
+                    onCancel={this.handleCancelRegister}
+                    onCreate={this.handleCreateRegister}
                 />
             </TweenOne>)}
         </TweenOne>);
@@ -253,5 +336,10 @@ export default connect(
     state => ({
         state: state
     }),
-    {updateChannelAndLoadData: updateChannelAndLoadData}
+    {
+        updateChannelAndLoadData: updateChannelAndLoadData,
+        loginAsync: loginAsync,
+        registerAsync: RegisterAsync,
+        logout: logout
+    }
 )(Nav)

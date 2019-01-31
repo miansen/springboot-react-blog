@@ -62,6 +62,9 @@
     text-align: center;
 }
 
+.author-name {
+    padding-left: 5px;
+}
 .article-item .article-theme {
     color: #3ca5f6;
 }

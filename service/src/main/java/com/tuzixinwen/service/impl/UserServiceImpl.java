@@ -3,8 +3,11 @@ package com.tuzixinwen.service.impl;
 import com.tuzixinwen.mapper.UserMapper;
 import com.tuzixinwen.model.User;
 import com.tuzixinwen.service.UserService;
+import com.tuzixinwen.util.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,5 +39,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUserByArticleCountDesc(Integer pageNo, Integer pageSize) {
         return userMapper.findUserByArticleCountDesc(pageNo,pageSize);
+    }
+
+    @Override
+    public void save(User user) {
+        this.userMapper.insert(user);
+    }
+
+    @Override
+    public User create(String username, String password, String email) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        user.setEmail(email);
+        user.setAvatar("https://static.tuzixinwen.com/images/default-avatar.jpg");
+        user.setSignature("这家伙很懒，什么都没留下");
+        user.setUserUrl("/user/"+username);
+        user.setScore(0);
+        user.setWebsite(null);
+        user.setBlock(false);
+        user.setDelete(false);
+        user.setRole(null);
+        user.setCreateDate(new Date());
+        user.setUpdateDate(null);
+        user.setRemark(null);
+        this.save(user);
+        return user;
     }
 }

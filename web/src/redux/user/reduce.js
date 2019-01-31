@@ -3,7 +3,10 @@ import {
     USER_LOAD_DATA_FINISH,
     USER_LOAD_MORE_START,
     USER_LOAD_MORE_FINISH,
-    GET_USER
+    GET_USER,
+    LOGIN,
+    REGISTER,
+    LOGOUT
 } from './action-type';
 
 export function user(state = {
@@ -12,6 +15,8 @@ export function user(state = {
     hasMore: false, //是否有下一页的数据
     article: [], //存放文章对象的数组
     user: null,
+    loginUsername: localStorage.getItem("username"), //登录用户名
+    loginAvatar: localStorage.getItem("avatar"), //登录用户头像
     scrollPosition: 0
 },action) {
     switch (action.type) {
@@ -48,6 +53,24 @@ export function user(state = {
             return {
                 ...state,
                 user: action.data.user
+            }
+        case LOGIN:
+            return {
+                ...state,
+                loginUsername: action.data.username,
+                loginAvatar: action.data.avatar
+            }
+        case REGISTER:
+            return {
+                ...state,
+                loginUsername: action.data.username,
+                loginAvatar: action.data.avatar
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                loginUsername: null,
+                loginAvatar: null
             }
         default:
             return state

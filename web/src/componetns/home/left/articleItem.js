@@ -75,7 +75,7 @@ class ArticleItem extends Component{
                                                 }
                                                 {
                                                     v.author.length > 0  && v.author != 'None' ?
-                                                        <Link to={"/user/" + v.user.username}><span className="label label-primary">{v.user.username}</span></Link>
+                                                        <Link to={"/user/" + v.user.username}><span className="author-name">{v.user.username}</span></Link>
                                                         :
                                                         null
                                                 }

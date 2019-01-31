@@ -1,34 +1,48 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Button, Modal, Form, Input, Radio,Alert } from 'antd';
 
-class Register extends Component{
+const FormItem = Form.Item;
+
+/**
+ * @Author: miansen
+ * @Date: 2018/11/28
+ * @description: 登录窗口
+ */
+class CollectionCreateForm  extends Component{
     render() {
+        const { visible, onCancel, onCreate, form, isNameOrPassErr } = this.props;
+        const { getFieldDecorator } = form;
+        // console.log("getFieldDecorator "+getFieldDecorator);
         return (
-            <section className="animated bounce">
-                <table border="0">
-                    <caption><h3>注册</h3></caption>
-                    <tbody>
-                    <tr>
-                        <td>用户名</td>
-                        <td><input type="text" ref="username" placeholder="用户名" /></td>
-                    </tr>
-                    <tr>
-                        <td>密码</td>
-                        <td><input type="password" ref="password" placeholder="密码" /></td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2" valign="middle">
-                            <div className="action">
-                                <span>已有帐号？<Link to="/login">去登录</Link></span>
-                                <button>注册</button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </section>
+            <Modal
+                visible={visible}
+                title="快速注册"
+                okText="注册"
+                onCancel={onCancel}
+                onOk={onCreate}
+            >
+                <Form layout="vertical">
+                    <FormItem label="用户名">
+                        {getFieldDecorator('username', {
+                            rules: [{ required: true, message: '请输入您的用户名!' }],
+                        })(
+                            <Input />
+                        )}
+                    </FormItem>
+                    <FormItem label="密码">
+                        {getFieldDecorator('password',{
+                            rules: [{ required: true, message: '请输入您的密码!' }],
+                        })(<Input type="password" />)}
+                    </FormItem>
+                    <FormItem label="邮箱">
+                        {getFieldDecorator('email')(<Input type="email" />)}
+                    </FormItem>
+                </Form>
+            </Modal>
         );
     }
 }
 
-export default Register;
+const register = Form.create()(CollectionCreateForm);
+
+export default register;

@@ -18,9 +18,13 @@ public class StringUtil {
     @Autowired
     private SiteConfig siteConfig;
 
+    // email正则
     public String emailRegex = "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}";
+    // url正则
     public String urlRegex = "^((https|http)?:\\/\\/)[^\\s]+";
+    // 用户名正则
     public String usernameRegex = "[a-z0-9A-Z]{2,16}";
+    // 密码正则
     public String passwordRegex = "[a-z0-9A-Z]{6,32}";
 
     public boolean check(String text, String regex) {

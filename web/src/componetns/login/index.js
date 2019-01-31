@@ -10,7 +10,7 @@ const FormItem = Form.Item;
  */
 class CollectionCreateForm  extends Component{
     render() {
-        const { visible, onCancel, onCreate, form, isNameOrPassErr } = this.props;
+        const { visible, onCancel, onCreate, form } = this.props;
         const { getFieldDecorator } = form;
         // console.log("getFieldDecorator "+getFieldDecorator);
         return (
@@ -35,7 +35,6 @@ class CollectionCreateForm  extends Component{
                             rules: [{ required: true, message: '请输入您的密码!' }],
                         })(<Input type="password" />)}
                     </FormItem>
-                    {isNameOrPassErr ? <Alert message="帐号或者密码错误!" type="error" /> : null}
                 </Form>
             </Modal>
         );

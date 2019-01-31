@@ -19,10 +19,14 @@ public interface UserService {
     User findUserByName(String name);
 
     /**
-     * 查询发表文章数量最多的用户
+     * 发表文章数量最多的用户
      * @param pageNo
      * @param pageSize
      * @return
      */
     List<User> findUserByArticleCountDesc(Integer pageNo, Integer pageSize);
+
+    void save(User user);
+
+    User create(String username, String password, String email);
 }

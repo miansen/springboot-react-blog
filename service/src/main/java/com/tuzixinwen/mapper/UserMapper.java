@@ -28,4 +28,5 @@ public interface UserMapper {
      */
     List<User> findUserByArticleCountDesc(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
 
+    int insert(User user);
 }

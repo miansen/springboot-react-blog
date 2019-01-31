@@ -84,4 +84,37 @@
             </if>
         </if>
     </select>
+    <insert id="insert" parameterType="com.tuzixinwen.model.User" keyProperty="userId" useGeneratedKeys="true">
+        INSERT INTO user
+        (username,
+        password,
+        email,
+        avatar,
+        signature,
+        user_url,
+        score,
+        website,
+        is_block,
+        is_delete,
+        role,
+        create_date,
+        update_date,
+        remark)
+        VALUES
+        (#{username},
+        #{password},
+        #{email},
+        #{avatar},
+        #{signature},
+        #{userUrl},
+        #{score},
+        #{website},
+        #{isBlock},
+        #{isDelete},
+        #{role},
+        #{createDate},
+        #{updateDate},
+        #{remark}
+        )
+    </insert>
 </mapper>

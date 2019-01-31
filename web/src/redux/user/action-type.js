@@ -17,3 +17,12 @@ export const USER_LOAD_MORE_FINISH = 'USER_LOAD_MORE_FINISH';
 
 //加载用户信息
 export const GET_USER = 'GET_USER';
+
+//登录
+export const LOGIN = 'LOGIN';
+
+//注册
+export const REGISTER = 'REGISTER';
+
+//登出
+export const LOGOUT = 'LOGOUT';

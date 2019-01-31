@@ -186,7 +186,7 @@ class Nav extends React.Component {
             <div className="header1-nav">
                 <a onClick={() => this.goToIndex()} style={{paddingRight: "20px"}}>首页</a>
                 <Dropdown overlay={menu} placement="bottomCenter">
-                    <a className="ant-dropdown-link" href="#">
+                    <a className="ant-dropdown-link" href="#" style={{padding: "0 20px"}}>
                         领域<Icon type="caret-down" />
                     </a>
                 </Dropdown>

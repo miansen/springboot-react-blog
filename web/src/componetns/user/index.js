@@ -24,19 +24,20 @@ class UserDetailHome extends Component{
         return (
             <div className="content">
                 <Row>
-                    <div className="column-title">
-                        <div className="panel-body">
-                            <div className="media">
-                                <div className="media-left user-left">
-                                    <img src={avatar} className="avatar-lg img-circle" alt=""/>
-                                </div>
-                                <div className="media-body user-body">
-                                    <h3 style={{marginTop: "10px"}} className="user-info username">{this.props.match.params.username}</h3>
+                    <Col xs={0} sm={0} md={0} lg={4} xl={4} xxl={4}></Col>
+                    <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>
+                        <div className="column-title">
+                            <div className="panel-body">
+                                <div className="media">
+                                    <div className="media-left user-left">
+                                        <img src={avatar} className="avatar-lg img-circle" alt=""/>
+                                    </div>
+                                    <div className="media-body user-body">
+                                        <h3 style={{marginTop: "10px"}} className="user-info username">{this.props.match.params.username}</h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <Col xs={24} sm={24} md={24} lg={15} xl={15} xxl={15}>
                         <div className="wrap-left pull-left">
                             <div className="channel-header" style={{marginBottom: "20px"}}>
                                 <Menu defaultSelectedKeys={['0']}
@@ -48,8 +49,7 @@ class UserDetailHome extends Component{
                             <UserDetailLeft username={this.props.match.params.username}/>
                         </div>
                     </Col>
-                    <Col xs={24} sm={24} md={24} lg={2} xl={2} xxl={2}></Col>
-                    <Col xs={24} sm={24} md={24} lg={7} xl={7} xxl={7}></Col>
+                    <Col xs={0} sm={0} md={0} lg={4} xl={4} xxl={4}></Col>
                 </Row>
             </div>
         );

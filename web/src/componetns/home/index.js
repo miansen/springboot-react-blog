@@ -34,12 +34,11 @@ class IndexHome extends Component{
                 {/*<Channel/>*/}
                 {channelName ? null : <Banner/>}
                 <Row>
-                    <Col xs={24} sm={24} md={24} lg={15} xl={15} xxl={15}>
+                    <Col xs={24} sm={24} md={24} lg={17} xl={17} xxl={17}>
                         <div className="wrap-left pull-left">
                             <ArticleList/>
                         </div>
                     </Col>
-                    <Col xs={0} sm={0} md={0} lg={2} xl={2} xxl={2}></Col>
                     <Col xs={24} sm={24} md={24} lg={7} xl={7} xxl={7}>
                         <div className="wrap-right pull-right">
                             <Theme/>

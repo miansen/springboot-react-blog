@@ -11,7 +11,7 @@ const Axios = axios.create({
     // baseURL: 'https://api.tuzixinwen.com'
 });
 
-Axios.defaults.headers.common['Authorization'] = "Bearer ";
+Axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
 Axios.defaults.headers['Content-Type'] = 'application/json; charset=UTF-8';
 
 // post提交数据时封装成from表单

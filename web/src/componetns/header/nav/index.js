@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TweenOne from 'rc-tween-one';
-import { Menu,Dropdown, Icon,Button,Avatar } from 'antd';
+import { Menu,Dropdown,Icon,Avatar,Modal } from 'antd';
 
 import './index.less';
 import Login from "../../login";
@@ -15,7 +15,7 @@ import {loginAsync,RegisterAsync,logout} from '../../../redux/user/action';
 import connect from "react-redux/es/connect/connect";
 
 const Item = Menu.Item;
-
+const confirm = Modal.confirm;
 /**
  * @Author: miansen
  * @Date: 2018/11/28
@@ -160,12 +160,20 @@ class Nav extends React.Component {
 
     // 登出
     logout = () => {
-        if (window.confirm('确定要登出吗？')) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("username");
-            localStorage.removeItem("avatar");
-            this.props.logout();
-        }
+        const logout = this.props.logout;
+        confirm({
+            title: '确定要登出吗？',
+            cancelText: '取消',
+            okTextL: '确定',
+            onOk() {
+                localStorage.removeItem("token");
+                localStorage.removeItem("username");
+                localStorage.removeItem("avatar");
+                logout();
+            },
+            onCancel() {
+            },
+        });
     }
 
     saveFormRef = (formRef) => {
@@ -298,12 +306,10 @@ class Nav extends React.Component {
                         </Menu>
 
                         :
-                        <Menu
-                            mode="horizontal"
-                            theme={this.state.theme}
-                        >
-                            {navChildren}
-                        </Menu>
+                        <div>
+                            <a onClick={this.showModal} style={{padding: "0 20px"}}>登录</a>
+                            <a onClick={this.showModalRegister} style={{padding: "0 20px"}}>注册</a>
+                        </div>
                 }
                 <Login
                     wrappedComponentRef={this.saveFormRef}

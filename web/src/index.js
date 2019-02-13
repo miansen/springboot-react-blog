@@ -16,6 +16,7 @@ import UserDetailHome from './componetns/user/index';
 import About from './componetns/about/index';
 import Crawler from './componetns/crawler';
 import NotFound from './componetns/error/notFound';
+import Create from './componetns/article/create';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -31,6 +32,7 @@ ReactDOM.render(
                 <DefaultLayout path='/user/:username' component={UserDetailHome} />
                 <DefaultLayout path='/about' component={About} />
                 <DefaultLayout path='/crawler' component={Crawler} />
+                <DefaultLayout path='/create' component={Create} />
                 <DefaultLayout component={NotFound} />
             </Switch>
         </BrowserRouter>

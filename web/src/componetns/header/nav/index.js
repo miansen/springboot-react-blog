@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TweenOne from 'rc-tween-one';
-import { Menu,Dropdown,Icon,Avatar,Modal } from 'antd';
+import { Menu,Dropdown,Icon,Avatar,Modal,Button } from 'antd';
 
 import './index.less';
 import Login from "../../login";
@@ -294,16 +294,14 @@ class Nav extends React.Component {
             >
                 {
                     this.props.state.user.loginUsername ?
-                        <Menu
-                            mode="horizontal"
-                            theme={this.state.theme}
-                        >
+                        <div>
+                            <Link to="/create"><Button type="dashed" shape="round" icon="edit" size="large" style={{margin: "0 20px"}}>写文章</Button></Link>
                             <Dropdown overlay={userMenu} placement="bottomCenter">
                                 <a className="ant-dropdown-link" href="#" style={{padding: "0 10px"}}>
                                     <Avatar size={30} src={this.props.state.user.loginAvatar} key="0"/>
                                 </a>
                             </Dropdown>
-                        </Menu>
+                        </div>
 
                         :
                         <div>

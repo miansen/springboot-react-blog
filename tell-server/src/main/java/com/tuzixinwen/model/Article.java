@@ -55,7 +55,7 @@ public class Article {
 
     private Integer crawlerArticleId;
 
-        private Double weight; // 话题权重
+    private Double weight; // 话题权重
 
     private Integer up; //赞
 

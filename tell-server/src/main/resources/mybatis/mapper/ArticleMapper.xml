@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tuzixinwen.mapper.ArticleMapper">
+<mapper namespace="com.tell.mapper.ArticleMapper">
 
-    <resultMap id="BaseResultMap" type="com.tuzixinwen.model.Article">
+    <resultMap id="BaseResultMap" type="com.tell.model.Article">
         <id column="article_id" jdbcType="INTEGER" property="articleId"/>
         <result column="channel_name" jdbcType="VARCHAR" property="channelName"/>
         <result column="theme_name" jdbcType="VARCHAR" property="themeName"/>
@@ -47,7 +47,7 @@
     </sql>
 
     <!--根据频道、主题、站点、作者获取文章-->
-    <select id="findArticle" resultType="com.tuzixinwen.model.Article">
+    <select id="findArticle" resultType="com.tell.model.Article">
         SELECT
           a.article_id,
           a.channel_name,
@@ -107,7 +107,7 @@
     </select>
 
     <!--随机获取当天的文章-->
-    <select id="findArticleByRand" resultType="com.tuzixinwen.model.Article">
+    <select id="findArticleByRand" resultType="com.tell.model.Article">
         SELECT
           a.article_id,
           a.channel_name,
@@ -155,7 +155,7 @@
     </select>
 
     <!--查询最新的文章-->
-    <select id="findArticleOderByDateDesc" resultType="com.tuzixinwen.model.Article">
+    <select id="findArticleOderByDateDesc" resultType="com.tell.model.Article">
         SELECT
           <include refid="Base_Column_List2"/>
         FROM
@@ -173,7 +173,7 @@
     </select>
 
     <!--查询点击次数最多的文章-->
-    <select id="findArticleOderByViewCountDesc" resultType="com.tuzixinwen.model.Article">
+    <select id="findArticleOderByViewCountDesc" resultType="com.tell.model.Article">
         SELECT
         <include refid="Base_Column_List2"/>
         FROM
@@ -192,7 +192,7 @@
     </select>
 
     <!--查询指定站点的文章-->
-    <select id="findArticleInSite" resultType="com.tuzixinwen.model.Article">
+    <select id="findArticleInSite" resultType="com.tell.model.Article">
         SELECT
           a.article_id,
           a.channel_name,
@@ -235,7 +235,7 @@
     </select>
 
     <!--查询作者的其他文章-->
-    <select id="findAuthorOtherArticle" resultType="com.tuzixinwen.model.Article">
+    <select id="findAuthorOtherArticle" resultType="com.tell.model.Article">
         SELECT
         a.article_id,
         a.channel_name,
@@ -281,7 +281,7 @@
     </select>
 
     <!--根据ID查询文章-->
-    <select id="selectById" resultType="com.tuzixinwen.model.Article">
+    <select id="selectById" resultType="com.tell.model.Article">
         SELECT
           a.article_id,
           a.channel_name,
@@ -317,7 +317,7 @@
     </select>
 
     <!--更新文章-->
-    <update id="updateByPrimaryKey" parameterType="com.tuzixinwen.model.Article">
+    <update id="updateByPrimaryKey" parameterType="com.tell.model.Article">
         UPDATE
           article
         SET

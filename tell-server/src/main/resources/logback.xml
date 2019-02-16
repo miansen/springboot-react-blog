@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  scan="true" scanPeriod="60 seconds" debug="false">
-    <contextName>com.tuzixinwen</contextName>
+    <contextName>com.tell</contextName>
     <property name="log.path" value="./logs/log.log" />
     <!--输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -29,9 +29,9 @@
     </root>
 
     <!-- logback为java中的包 -->
-    <logger name="com.tuzixinwen"/>
+    <logger name="com.tell"/>
     <!--logback.LogbackDemo：类的全路径 -->
-    <logger name="com.tuzixinwen" level="INFO" additivity="false">
+    <logger name="com.tell" level="INFO" additivity="false">
         <appender-ref ref="console"/>
         <appender-ref ref="file"/>
     </logger>

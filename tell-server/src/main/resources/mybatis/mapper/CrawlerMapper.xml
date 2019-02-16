@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tuzixinwen.mapper.CrawlerMapper">
-    <insert id="insertCrawlerHub" parameterType="com.tuzixinwen.model.CrawlerHub" keyProperty="hub_id">
+<mapper namespace="com.tell.mapper.CrawlerMapper">
+    <insert id="insertCrawlerHub" parameterType="com.tell.model.CrawlerHub" keyProperty="hub_id">
         INSERT INTO
         crawler_hub
         (hub_url,

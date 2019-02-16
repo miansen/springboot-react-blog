@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tuzixinwen.mapper.ThemeMapper">
+<mapper namespace="com.tell.mapper.ThemeMapper">
 
-    <resultMap id="BaseResultMap" type="com.tuzixinwen.model.Theme">
+    <resultMap id="BaseResultMap" type="com.tell.model.Theme">
         <!--主题ID-->
         <id column="theme_id" jdbcType="INTEGER" property="themeId"/>
         <!--主题编码-->
@@ -38,7 +38,7 @@
     </sql>
 
     <!--查询所有主题-->
-    <select id="findThemeAll" resultType="com.tuzixinwen.model.Theme">
+    <select id="findThemeAll" resultType="com.tell.model.Theme">
         SELECT
           theme_id,
           theme_code,

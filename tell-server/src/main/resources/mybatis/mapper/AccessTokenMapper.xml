@@ -3,20 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tuzixinwen.mapper.AccessTokenMapper">
+<mapper namespace="com.tell.mapper.AccessTokenMapper">
 
-    <resultMap id="BaseResultMap" type="com.tuzixinwen.model.AccessToken">
+    <resultMap id="BaseResultMap" type="com.tell.model.AccessToken">
         <id column="access_token_id" jdbcType="INTEGER" property="accessTokenId"/>
         <result column="token" jdbcType="VARCHAR" property="token"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
 
-    <select id="selectByUserId" resultType="com.tuzixinwen.model.AccessToken">
+    <select id="selectByUserId" resultType="com.tell.model.AccessToken">
         SELECT * FROM access_token WHERE user_id = #{userId}
     </select>
 
-    <insert id="insert" parameterType="com.tuzixinwen.model.AccessToken" keyProperty="accessTokenId" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.tell.model.AccessToken" keyProperty="accessTokenId" useGeneratedKeys="true">
         INSERT INTO access_token
         (token,
          user_id,

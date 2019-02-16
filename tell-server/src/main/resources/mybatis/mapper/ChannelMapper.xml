@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tuzixinwen.mapper.ChannelMapper">
+<mapper namespace="com.tell.mapper.ChannelMapper">
 
-    <select id="selectAll" resultType="com.tuzixinwen.model.Channel">
+    <select id="selectAll" resultType="com.tell.model.Channel">
         SELECT
           *
         FROM
@@ -16,7 +16,7 @@
           channel_order
     </select>
 
-    <select id="findbyName" resultType="com.tuzixinwen.model.Channel">
+    <select id="findbyName" resultType="com.tell.model.Channel">
         SELECT
           *
         FROM

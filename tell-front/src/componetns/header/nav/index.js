@@ -295,7 +295,7 @@ class Nav extends React.Component {
                 {
                     this.props.state.user.loginUsername ?
                         <div>
-                            <Link to="/create"><Button type="dashed" shape="round" icon="edit" size="large" style={{margin: "0 20px"}}>写文章</Button></Link>
+                            <Link to="/create" className="create-article">写文章</Link>
                             <Dropdown overlay={userMenu} placement="bottomCenter">
                                 <a className="ant-dropdown-link" href="#" style={{padding: "0 10px"}}>
                                     <Avatar size={30} src={this.props.state.user.loginAvatar} key="0"/>

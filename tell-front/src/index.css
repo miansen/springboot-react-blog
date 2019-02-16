@@ -22,10 +22,6 @@ img {
   border-style: none;
 }
 
-a:visited {
-  color: #999;
-}
-
 #components-back-top-demo-custom .ant-back-top-inner {
   background-color: #e4e4e4;
 }

@@ -9,7 +9,7 @@
 }
 
 .media-left, .media>.pull-left {
-    padding-right: 10px;
+    padding-right: 20px;
 }
 
 .article .avatar {
@@ -20,15 +20,16 @@
 }
 
 .title {
-    font-size: 20px;
-    line-height: 1.3;
-    margin-bottom: 4px;
-    font-weight: 700;
-    max-height: 52px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    word-break: normal;
+    word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .excerpt {
@@ -40,7 +41,8 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .media span {
@@ -54,9 +56,13 @@
     color: #999;
 }
 
+.gray a {
+    color: #999;
+}
+
 .author-media-avatar img{
-    width: 18px;
-    height: 18px;
+    width: 25px;
+    height: 25px;
     margin-right: 2px;
     border-radius: 50%;
     text-align: center;

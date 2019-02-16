@@ -152,3 +152,11 @@
 .header1-nav a:hover {
     color: #ed4040;
 }
+
+.create-article {
+    padding: 0 20px;
+}
+
+.create-article:visited {
+    color: #333;
+}

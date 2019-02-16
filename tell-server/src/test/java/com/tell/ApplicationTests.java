@@ -19,9 +19,9 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TuzixinwenApplicationTests {
+public class ApplicationTests {
 
-	private Logger logger = LoggerFactory.getLogger(TuzixinwenApplicationTests.class);
+	private Logger logger = LoggerFactory.getLogger(ApplicationTests.class);
 
 	@Autowired
 	private ArticleMapper articleMapper;

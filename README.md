@@ -1,6 +1,4 @@
-# abstract
-
-## 预览地址：[https://www.tuzixinwen.com](https://www.tuzixinwen.com)
+# tell
 
 ## 技术栈
 
@@ -13,16 +11,18 @@
 ## 功能
 
 - [x] 首页浏览
-- [ ] 登录
-- [ ] 注册
-- [ ] 发文章
+- [x] 登录
+- [x] 注册
+- [x] 发文章
 - [ ] 评论
 - [ ] 通知
 - [x] 文章详情
 - [x] 主题详情
-- [x] 站点详情
 - [x] 作者详情
-- [x] 数据爬虫
+
+## 预览
+
+![](https://raw.githubusercontent.com/miansen/miansen.github.io/master/assets/20190217194358.jpg)
 
 ## 快速开始
 
@@ -36,7 +36,7 @@
 - Nodejs10.13或以上
 - yarn1.12.3或以上
 
-1.克隆项目到本地：https://github.com/miansen/abstract.git
+1.克隆项目到本地：https://github.com/miansen/tell.git
 
 2.创建MySQL数据库`kxw`，字符集utf8mb4。
 
@@ -44,7 +44,7 @@
 
 4.修改数据源配置
 
-数据源配置文件`application.yml`位于service模块下的静态资源目录（resources）下
+数据源配置文件`application.yml`位于tell-server模块下的静态资源目录（resources）下
 
 ```
 spring:
@@ -63,38 +63,25 @@ spring:
 输入以下命令
 
 ```
-cd abstract/service
+cd tell/tell-server
 mvn install
 mvn package
 mvn spring-boot:run
 ```
-出现以下画面则说明启动成功
-
-![image](https://miansen.wang/assets/20190125155537.jpg)
-
-可以看到后台服务已经在8080端口启动了
 
 6.启动前端界面
 
 输入以下命令
 
 ```
-cd abstract/web
+cd tell/tell-front
 yarn install
 yarn start
 ```
 
-出现以下画面则说明启动成功
-
-![image](https://miansen.wang/assets/20190125163100.jpg)
-
-启动成功后会自动跳转到浏览器页面，端口默认是3000
-
-![image](https://miansen.wang/assets/20190125160420.jpg)
-
 ## 反馈
 
-[issues](https://github.com/miansen/tuzixinwen/issues)
+[issues](https://github.com/miansen/tell/issues)
 
 ## 贡献
 

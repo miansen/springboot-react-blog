@@ -1,4 +1,4 @@
-# 兔子新闻-后台服务
+# tell-server
 
 ## 技术栈
 
@@ -54,7 +54,3 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.jdbc.Driver
 ```
-
-## 本地运行
-
-## 服务器部署

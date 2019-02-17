@@ -246,11 +246,7 @@ class Nav extends React.Component {
             </TweenOne>
             <div className="header1-nav">
                 <a onClick={() => this.goToIndex()} style={{paddingRight: "20px"}}>首页</a>
-                <Dropdown overlay={menu} placement="bottomCenter">
-                    <a className="ant-dropdown-link" href="#" style={{padding: "0 20px"}}>
-                        领域<Icon type="caret-down" />
-                    </a>
-                </Dropdown>
+                <Link to="/themes" className="create-article">发现</Link>
             </div>
             {isMobile ? (<div
                 className={`${this.props.className}-phone-nav${this.state.phoneOpen ? ' open' : ''}`}

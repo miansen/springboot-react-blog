@@ -65,7 +65,7 @@ public class UserController {
      */
     @GetMapping(value = "/user/recommend")
     private Result recommend(){
-        List<User> list = userService.findUserByArticleCountDesc(0, 3);
+        List<User> list = userService.findUserByArticleCountDesc(0, 5);
         return Result.success(list);
     }
 }

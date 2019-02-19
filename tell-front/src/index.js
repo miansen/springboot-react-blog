@@ -16,7 +16,7 @@ import UserDetailHome from './componetns/user/index';
 import About from './componetns/about/index';
 import Crawler from './componetns/crawler';
 import NotFound from './componetns/error/notFound';
-import Create from './componetns/article/create5';
+import Create from './componetns/article/create7';
 
 ReactDOM.render(
     <Provider store={store}>

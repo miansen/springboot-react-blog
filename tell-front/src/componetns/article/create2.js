@@ -1,36 +1,51 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import MonacoEditor from 'react-monaco-editor';
+import {MonacoDiffEditor} from 'react-monaco-editor';
+
+const defaultCode =
+    `export default {
+  name: 'name',
+  code: 'code'
+}`;
 
 class Create2 extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            code: '// type your code...',
+            code: defaultCode,
         }
+        this.onChangeHandle = this.onChangeHandle.bind(this);
     }
-    editorDidMount(editor, monaco) {
+
+    onChangeHandle(value,e) {
+        this.setState({
+            code: value
+        });
+    }
+
+    editorDidMountHandle(editor, monaco) {
         console.log('editorDidMount', editor);
         editor.focus();
     }
-    onChange(newValue, e) {
-        console.log('onChange', newValue, e);
-    }
+
     render() {
         const code = this.state.code;
+        const options1 = {
+            selectOnLineNumbers: true,
+            renderSideBySide: false
+        };
+        const code1 = "// your original code...";
+        const code2 = "// a different version...";
         const options = {
-            selectOnLineNumbers: true
+            //renderSideBySide: false
         };
         return (
-            <MonacoEditor
+            <MonacoDiffEditor
                 width="800"
                 height="600"
                 language="javascript"
-                theme="vs-dark"
-                value={code}
+                original={code1}
+                value={code2}
                 options={options}
-                onChange={this.onChange}
-                editorDidMount={this.editorDidMount}
             />
         );
     }

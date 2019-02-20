@@ -60,7 +60,7 @@ class Create7 extends Component{
                             <div className="card-container">
                                 <Tabs onTabClick={this.onTabClick}>
                                     <TabPane tab="编辑" key="1">
-                                        <TextArea rows={4} autosize={{ minRows: 22, maxRows: 26 }} placeholder="请输入正文（支持Markdown）"/>
+                                        <TextArea rows={4} autosize={{ minRows: 22, maxRows: 22 }} placeholder="请输入正文（支持Markdown）"/>
                                     </TabPane>
                                     <TabPane tab="预览" key="2">
                                         <div className="article-body markdown-body" dangerouslySetInnerHTML={{__html: this.state.previewContent}}></div>

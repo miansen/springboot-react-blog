@@ -240,9 +240,7 @@ class Nav extends React.Component {
                 animation={{ x: -30, type: 'from', ease: 'easeOutQuad' }}
                 id={`${this.props.id}-logo`}
             >
-                <a onClick={() => this.goToIndex()}>
-                    <img width="100%" src="https://static.tuzixinwen.com/images/logo-15.png" />
-                </a>
+                <Link to="/"><h2>Tell</h2></Link>
             </TweenOne>
             <div className="header1-nav">
                 <a onClick={() => this.goToIndex()} style={{paddingRight: "20px"}}>首页</a>

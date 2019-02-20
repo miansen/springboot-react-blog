@@ -145,14 +145,6 @@
     line-height: 64px;
 }
 
-.header1-nav a {
-    color: #333;
-}
-
-.header1-nav a:hover {
-    color: #ed4040;
-}
-
 .create-article {
     padding: 0 20px;
 }

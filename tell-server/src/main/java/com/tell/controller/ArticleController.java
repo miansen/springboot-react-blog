@@ -5,10 +5,7 @@ import com.tell.exception.ApiAssert;
 import com.tell.model.Article;
 import com.tell.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,5 +47,17 @@ public class ArticleController {
                                          @RequestParam(value = "currentArticleId") Integer currentArticleId){
         List<Article> list = articleService.findAuthorOtherArticle(author, currentArticleId, 0, 10);
         return Result.success(list);
+    }
+
+    /**
+     * 新增文章
+     * @param article
+     * @return
+     */
+    @PostMapping(value = "/article")
+    public Result save(@RequestBody Article article){
+        ApiAssert.notNull(article,"对象为空");
+        article = articleService.save(article);
+        return Result.success(article);
     }
 }

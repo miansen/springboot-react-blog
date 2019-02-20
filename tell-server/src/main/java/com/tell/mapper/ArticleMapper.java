@@ -117,4 +117,11 @@ public interface ArticleMapper {
      * @return
      */
     int updateByPrimaryKey(Article article);
+
+    /**
+     * 新增文章
+     * @param article
+     * @return
+     */
+    int insert(Article article);
 }

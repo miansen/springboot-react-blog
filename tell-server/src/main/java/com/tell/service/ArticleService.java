@@ -109,4 +109,10 @@ public interface ArticleService {
      * @param article
      */
     double weight(Article article);
+
+    /**
+     * 新增文章
+     * @param article
+     */
+    Article save(Article article);
 }

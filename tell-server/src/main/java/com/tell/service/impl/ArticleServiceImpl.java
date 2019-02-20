@@ -177,4 +177,14 @@ public class ArticleServiceImpl implements ArticleService{
         // article.setWeight(weightScore);
         return weightScore;
     }
+
+    /**
+     * 新增文章
+     * @param article
+     */
+    @Override
+    public Article save(Article article) {
+        this.articleMapper.insert(article);
+        return article;
+    }
 }

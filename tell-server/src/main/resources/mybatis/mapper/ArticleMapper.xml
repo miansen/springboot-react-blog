@@ -370,4 +370,22 @@
         </where>
     </select>
 
+    <insert id="insert" parameterType="com.tell.model.Article" keyProperty="articleId" useGeneratedKeys="true">
+        INSERT INTO article
+        (theme_name,
+         title,
+         content,
+         excerpt,
+         author,
+         avatar,
+         create_date)
+         VALUES
+         (#themeName,
+          #title,
+          #content,
+          #excerpt,
+          #author,
+          #avatar,
+          #createDate)
+    </insert>
 </mapper>

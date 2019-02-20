@@ -380,12 +380,12 @@
          avatar,
          create_date)
          VALUES
-         (#themeName,
-          #title,
-          #content,
-          #excerpt,
-          #author,
-          #avatar,
-          #createDate)
+         (#{themeName},
+          #{title},
+          #{content},
+          #{excerpt},
+          #{author},
+          #{avatar},
+          #{createDate})
     </insert>
 </mapper>

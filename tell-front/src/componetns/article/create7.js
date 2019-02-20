@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import marked from 'marked';
 import { Form, Input, Button, Tabs, Select } from 'antd'
 
@@ -14,12 +15,7 @@ class Create7 extends Component{
         this.state = {
             previewContent: marked(''), //渲染后的正文，
             themes: [], //分类列表
-            article:{
-                title: null,
-                content: null,
-                theme_name: null,
-                author: localStorage.getItem("username")
-            }
+            theme: null //选中的分类
         }
     }
 
@@ -38,18 +34,35 @@ class Create7 extends Component{
         })
     }
 
+    // 点击提交按钮事件
     handleSubmit = (event) => {
 
         event.preventDefault()
 
         this.props.form.validateFields((error, values) => {
             if (!error) {
-                console.log(values)
+                const article = {
+                    title: values.title,
+                    content: marked(values.content ? values.content : ''),
+                    avatar: values.avatar,
+                    themeName: values.theme,
+                    author: localStorage.getItem("username")
+                }
+                Axios.post("/article",article).then(({data}) => {
+                    if (data.code === 200) {
+                        return (<Redirect to={data.detail.articleId} />);
+                    }else{
+                        {openNotificationWithIcon("error","Error",data.description)}
+                    }
+                }).catch(error => {
+                    {openNotificationWithIcon("error","Error",error.message)}
+                })
             }
         })
 
     }
 
+    // 切换标签页时的回调
     onTabClick = () => {
         const content = this.props.form.getFieldValue('content')
         this.setState({
@@ -57,9 +70,11 @@ class Create7 extends Component{
         })
     }
 
-    //
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
+    // 选中option时调用此函数
+    handleOptionChange = (value) => {
+        this.setState({
+            theme: value
+        })
     }
 
     handleBlur = () => {
@@ -123,7 +138,7 @@ class Create7 extends Component{
                                 style={{ width: 200 }}
                                 placeholder="请选择一个分类"
                                 optionFilterProp="children"
-                                onChange={this.handleChange}
+                                onChange={this.handleOptionChange}
                                 onFocus={this.handleFocus}
                                 onBlur={this.handleBlur}
                                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}

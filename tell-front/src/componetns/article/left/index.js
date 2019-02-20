@@ -78,9 +78,14 @@ class ArticleDetail extends Component{
                                     </ul>
                                 </div>
                                 <div className="mt-20 hidden-xs"></div>
-                                <p className="ellipsis mt-10 mb-15">
-                                    原文: <a target="_blank" href={this.state.article.articleUrl}>{this.state.article.articleUrl}</a>
-                                </p>
+                                {
+                                    this.state.article.articleUrl != null ?
+                                        <p className="ellipsis mt-10 mb-15">
+                                            原文: <a target="_blank" href={this.state.article.articleUrl}>{this.state.article.articleUrl}</a>
+                                        </p>
+                                        :
+                                        null
+                                }
                             </div>
                             <div className="article-body markdown-body" dangerouslySetInnerHTML={{__html: this.state.article.content}}>
                             </div>

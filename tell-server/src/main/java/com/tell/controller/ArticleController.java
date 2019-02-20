@@ -7,6 +7,7 @@ import com.tell.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,6 +58,7 @@ public class ArticleController {
     @PostMapping(value = "/article")
     public Result save(@RequestBody Article article){
         ApiAssert.notNull(article,"对象为空");
+        article.setCreateDate(new Date());
         article = articleService.save(article);
         return Result.success(article);
     }

@@ -85,23 +85,23 @@ class ArticleItem extends Component{
                                                         :
                                                         null
                                                 }
-                                                {
-                                                    v.themeName.length > 0  && v.themeName != 'None' ?
-                                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                        :
-                                                        null
-                                                }
-                                                {
-                                                    v.themeName.length > 0  && v.themeName != 'None' ?
-                                                        <Link to={"/theme/" + v.themeName}><span className="label article-theme">{v.themeName}</span></Link>
-                                                        :
-                                                        null
-                                                }
                                                 <Link to="#"><Icon type="like" /></Link>
                                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                 <Link to={"/article/"+v.articleId} target="_blank" className="comment"><Icon type="message" /></Link>
                                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                 <span>{moment(v.createDate).fromNow()}</span>
+                                                {
+                                                    v.themeName != null && v.themeName.length > 0  && v.themeName != 'None' ?
+                                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                        :
+                                                        null
+                                                }
+                                                {
+                                                    v.themeName != null && v.themeName.length > 0  && v.themeName != 'None' ?
+                                                        <Link to={"/theme/" + v.themeName}><span className="label article-theme">{v.themeName}</span></Link>
+                                                        :
+                                                        null
+                                                }
                                             </p>
                                         </div>
                                     </div>

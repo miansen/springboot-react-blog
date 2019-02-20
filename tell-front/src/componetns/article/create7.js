@@ -44,13 +44,14 @@ class Create7 extends Component{
                 const article = {
                     title: values.title,
                     content: marked(values.content ? values.content : ''),
+                    excerpt: values.content.substring(0,200),
                     avatar: values.avatar,
                     themeName: values.theme,
                     author: localStorage.getItem("username")
                 }
                 Axios.post("/article",article).then(({data}) => {
                     if (data.code === 200) {
-                        return (<Redirect to={data.detail.articleId} />);
+                        this.props.history.push("/article/"+data.detail.articleId)
                     }else{
                         {openNotificationWithIcon("error","Error",data.description)}
                     }

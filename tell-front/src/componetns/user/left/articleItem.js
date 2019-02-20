@@ -50,7 +50,7 @@ class ArticleItem extends Component{
                                             }
                                         </div>
                                         {
-                                            v.excerpt.length > 0 ?
+                                            v.excerpt != null && v.excerpt.length > 0 ?
                                                 <div className="excerpt"><span>{v.excerpt}</span></div>
                                                 :
                                                 null
@@ -58,26 +58,26 @@ class ArticleItem extends Component{
                                         <div className="tip">
                                             <p className="gray">
                                                 {
-                                                    v.siteName.length > 0 ?
+                                                    v.siteName != null && v.siteName.length > 0 ?
                                                         <Link to={"/site/" + v.siteName}><span className="label label-primary">{v.siteName}</span></Link>
                                                         :
                                                         null
                                                 }
                                                 {
-                                                    v.siteName.length > 0 ?
+                                                    v.siteName != null && v.siteName.length > 0 ?
                                                         <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
                                                         :
                                                         null
                                                 }
                                                 <span>{moment(v.createDate).fromNow()}</span>
                                                 {
-                                                    v.themeName.length > 0 && v.themeName != 'None' ?
+                                                    v.themeName != null && v.themeName.length > 0 && v.themeName != 'None' ?
                                                         <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
                                                         :
                                                         null
                                                 }
                                                 {
-                                                    v.themeName.length > 0 && v.themeName != 'None' ?
+                                                    v.themeName != null && v.themeName.length > 0 && v.themeName != 'None' ?
                                                         <Link to={"/theme/" + v.themeName}><span className="label article-theme">{v.themeName}</span></Link>
                                                         :
                                                         null

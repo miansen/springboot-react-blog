@@ -160,8 +160,6 @@
           <include refid="Base_Column_List2"/>
         FROM
           article
-        WHERE
-        channel_name in ('热点','国际','科技','体育','财经','军事','娱乐')
         ORDER BY
           create_date desc
         <if test="pageNo != null">
@@ -179,8 +177,7 @@
         FROM
         article
         WHERE
-        channel_name in ('热点','国际','科技','体育','财经','军事','娱乐')
-        AND avatar is not NULL
+        avatar is not NULL
         ORDER BY
         view_count desc
         <if test="pageNo != null">

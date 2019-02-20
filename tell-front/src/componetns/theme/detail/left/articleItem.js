@@ -50,7 +50,7 @@ class ArticleItem extends Component{
                                             }
                                         </div>
                                         {
-                                            v.excerpt.length > 0 ?
+                                            v.excerpt != null && v.excerpt.length > 0 ?
                                                 <div className="excerpt"><span>{v.excerpt}</span></div>
                                                 :
                                                 null
@@ -58,19 +58,19 @@ class ArticleItem extends Component{
                                         <div className="tip">
                                             <p className="gray">
                                                 {
-                                                    v.siteName.length > 0 ?
+                                                    v.siteName != null && v.siteName.length > 0 ?
                                                         <Link to={"/site/" + v.siteName}><span className="label label-primary">{v.siteName}</span></Link>
                                                         :
                                                         null
                                                 }
                                                 {
-                                                    v.siteName.length > 0 ?
+                                                    v.siteName != null && v.siteName.length > 0 ?
                                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                         :
                                                         null
                                                 }
                                                 {
-                                                    v.author.length > 0 && v.author != 'None' ?
+                                                    v.author != null && v.author.length > 0 && v.author != 'None' ?
                                                         <Link to={"/user/" + v.user.username} target="_blank" className="author-media-avatar">
                                                             <img src={v.user.avatar} alt=""/>
                                                         </Link>
@@ -78,13 +78,13 @@ class ArticleItem extends Component{
                                                         null
                                                 }
                                                 {
-                                                    v.author.length > 0 && v.author != 'None' ?
+                                                    v.author != null && v.author.length > 0 && v.author != 'None' ?
                                                         <Link to={"/user/" + v.user.username}><span className="label label-primary">{v.user.username}</span></Link>
                                                         :
                                                         null
                                                 }
                                                 {
-                                                    v.author.length > 0 && v.author != 'None' ?
+                                                    v.author != null && v.author.length > 0 && v.author != 'None' ?
                                                         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                         :
                                                         null

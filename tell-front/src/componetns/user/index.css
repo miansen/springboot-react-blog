@@ -28,7 +28,7 @@ h3{
     line-height: 1.43;
 }
 
-.panel-body:before {
+/*.panel-body:before {
     content: '';
     position: absolute;
     width: 4px;
@@ -36,7 +36,7 @@ h3{
     background: #f63756;
     left: 0;
     top: 14px;
-}
+}*/
 
 .user-body:before {
     display: none;

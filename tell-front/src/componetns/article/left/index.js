@@ -73,7 +73,18 @@ class ArticleDetail extends Component{
                                             }
                                             <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
                                             <span className="article-time article-createDate">{moment(this.state.article.createDate).format('YYYY-DD-MM h:mm:ss')}</span>
-                                            <span className="theme"><Link to={"/theme/"+this.state.article.themeName}>{this.state.article.themeName}</Link></span>
+                                            {
+                                                this.state.article.themeName != null && this.state.article.themeName.length > 0  && this.state.article.themeName != 'None' ?
+                                                    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+                                                    :
+                                                    null
+                                            }
+                                            {
+                                                this.state.article.themeName != null && this.state.article.themeName.length > 0  && this.state.article.themeName != 'None' ?
+                                                    <span className="theme"><Link to={"/theme/"+this.state.article.themeName}>{this.state.article.themeName}</Link></span>
+                                                    :
+                                                    null
+                                            }
                                         </li>
                                     </ul>
                                 </div>

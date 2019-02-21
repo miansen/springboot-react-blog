@@ -44,7 +44,7 @@ class Create7 extends Component{
                 const article = {
                     title: values.title,
                     content: marked(values.content ? values.content : ''),
-                    excerpt: values.content.substring(0,200),
+                    excerpt: values.excerpt ? values.excerpt : values.content.substring(0,200),
                     avatar: values.avatar,
                     themeName: values.theme,
                     author: localStorage.getItem("username")
@@ -130,6 +130,11 @@ class Create7 extends Component{
                     <Form.Item label="文章头图">
                         {getFieldDecorator('avatar')(
                             <Input size="large" placeholder="请输入头图链接"/>
+                        )}
+                    </Form.Item>
+                    <Form.Item label="文章摘录">
+                        {getFieldDecorator('excerpt')(
+                            <Input size="large" placeholder="请输入文章摘录"/>
                         )}
                     </Form.Item>
                     <Form.Item label="文章分类">

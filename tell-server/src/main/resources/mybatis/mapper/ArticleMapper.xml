@@ -170,7 +170,7 @@
         </if>
     </select>
 
-    <!--查询点击次数最多的文章-->
+    <!--查询weight最高的文章-->
     <select id="findArticleOderByViewCountDesc" resultType="com.tell.model.Article">
         SELECT
         <include refid="Base_Column_List2"/>
@@ -179,7 +179,7 @@
         WHERE
         avatar is not NULL
         ORDER BY
-        view_count desc
+        weight desc,create_date desc
         <if test="pageNo != null">
             LIMIT #{pageNo}
             <if test="pageSize != null">

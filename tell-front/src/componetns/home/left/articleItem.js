@@ -27,11 +27,11 @@ class ArticleItem extends Component{
                                     <div className="media-left">
                                         {
                                             v.showContent ?
-                                                <Link to={"/article/"+v.articleId} target="_blank" onClick={this.handlerClickArticleId.bind(this,v.articleId)}>
+                                                <Link to={"/article/"+v.articleId} onClick={this.handlerClickArticleId.bind(this,v.articleId)}>
                                                     <img src={v.avatar} className="avatar img-circle" alt=""/>
                                                 </Link>
                                                 :
-                                                <a href={v.articleUrl} target="_blank" onClick={this.handlerClickArticleId.bind(this,v.articleId)}>
+                                                <a href={v.articleUrl} onClick={this.handlerClickArticleId.bind(this,v.articleId)}>
                                                     <img src={v.avatar} className="avatar img-circle" alt=""/>
                                                 </a>
                                         }
@@ -40,9 +40,9 @@ class ArticleItem extends Component{
                                         <div className="title">
                                             {
                                                 v.showContent ?
-                                                    <Link to={"/article/"+v.articleId} target="_blank">{v.title}</Link>
+                                                    <Link to={"/article/"+v.articleId}>{v.title}</Link>
                                                     :
-                                                    <a href={v.articleUrl} target="_blank" onClick={this.handlerClickArticleId.bind(this,v.articleId)}>{v.title}</a>
+                                                    <a href={v.articleUrl} onClick={this.handlerClickArticleId.bind(this,v.articleId)}>{v.title}</a>
                                             }
                                         </div>
                                         {
@@ -67,7 +67,7 @@ class ArticleItem extends Component{
                                                 }
                                                 {
                                                     v.author.length > 0 && v.author != 'None' ?
-                                                        <Link to={"/user/" + v.user.username} target="_blank" className="author-media-avatar">
+                                                        <Link to={"/user/" + v.user.username} className="author-media-avatar">
                                                             <img src={v.user.avatar} alt=""/>
                                                         </Link>
                                                         :
@@ -87,7 +87,7 @@ class ArticleItem extends Component{
                                                 }
                                                 <Link to="#"><Icon type="like" /></Link>
                                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                <Link to={"/article/"+v.articleId} target="_blank" className="comment"><Icon type="message" /></Link>
+                                                <Link to={"/article/"+v.articleId} className="comment"><Icon type="message" /></Link>
                                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                 <span>{moment(v.createDate).fromNow()}</span>
                                                 {

@@ -17,6 +17,7 @@ import About from './componetns/about/index';
 import Crawler from './componetns/crawler';
 import NotFound from './componetns/error/notFound';
 import Create from './componetns/article/create7';
+import Settings from './componetns/user/settings';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -30,6 +31,7 @@ ReactDOM.render(
                 <DefaultLayout path='/theme/:themeName' component={ThemeDetailHome} />
                 <DefaultLayout path='/site/:siteName' component={SiteDetailHome} />
                 <DefaultLayout path='/user/:username' component={UserDetailHome} />
+                <DefaultLayout path='/settings' component={Settings} />
                 <DefaultLayout path='/about' component={About} />
                 <DefaultLayout path='/crawler' component={Crawler} />
                 <DefaultLayout path='/create' component={Create} />

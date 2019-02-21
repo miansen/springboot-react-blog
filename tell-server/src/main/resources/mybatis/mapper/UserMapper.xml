@@ -39,7 +39,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        user_id, username, password, email, avatar, signature, user_url, score,
+        user_id, username, email, avatar, signature, user_url, score,
         website, is_block, is_delete, role, create_date, update_date, remark
     </sql>
 

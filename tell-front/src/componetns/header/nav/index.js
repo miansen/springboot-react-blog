@@ -192,7 +192,7 @@ class Nav extends React.Component {
     }
 
     render() {
-        console.log("登录用户名："+this.props.state.user.loginUsername)
+        // console.log("登录用户名："+this.props.state.user.loginUsername)
         // 频道列表
         const menu = (
             <Menu>
@@ -207,6 +207,12 @@ class Nav extends React.Component {
         );
         // 用户选项
         const userMenu = <Menu>
+            <Menu.Item>
+                <Link to={"/user/"+this.props.state.user.loginUsername}>个人中心</Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/settings">个人设置</Link>
+            </Menu.Item>
             <Menu.Item>
                 <a onClick={this.logout}>登出</a>
             </Menu.Item>

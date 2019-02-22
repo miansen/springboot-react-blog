@@ -38,19 +38,6 @@ public class ArticleController {
     }
 
     /**
-     * 获取作者的其他文章
-     * @param author: 作者
-     * @param currentArticleId: 当前文章ID
-     * @return
-     */
-    @GetMapping(value = "/article/author/other")
-    private Result getAuthorOtherArticle(@RequestParam(value = "author")String author,
-                                         @RequestParam(value = "currentArticleId") Integer currentArticleId){
-        List<Article> list = articleService.findAuthorOtherArticle(author, currentArticleId, 0, 10);
-        return Result.success(list);
-    }
-
-    /**
      * 新增文章
      * @param article
      * @return

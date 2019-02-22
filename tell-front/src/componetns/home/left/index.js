@@ -17,15 +17,14 @@ class ArticleList extends Component{
 
     //在渲染前调用，加载第一页的数据
     componentWillMount(){
-        this.props.indexLoadData({url: "/channel/articles",channelName: this.props.state.index.channelName,pageNo: 1});
+        this.props.indexLoadData({url: "/articles",pageNo: 1});
     }
 
     //加载下一页的数据
     loadMore(){
         this.props.indexLoadMore(
             {
-                url:"/channel/articles",
-                channelName: this.props.state.index.channelName,
+                url:"/articles",
                 pageNo:this.props.state.index.pageNo
             }
         );

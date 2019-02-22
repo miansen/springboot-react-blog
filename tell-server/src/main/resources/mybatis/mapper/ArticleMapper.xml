@@ -46,7 +46,7 @@
         show_content,create_date, update_date, weight, up, down
     </sql>
 
-    <!--根据频道、主题、站点、作者获取文章-->
+    <!--根据主题、作者获取文章-->
     <select id="findArticle" resultType="com.tell.model.Article">
         SELECT
           a.article_id,
@@ -72,32 +72,18 @@
           a.up,a.down,
           b.user_id "user.userId",
           b.username "user.username",
-          b.avatar "user.avatar",
-          c.channel_id "channel.channelId",
-          c.channel_name "channel.channelName",
-          c.channel_order "channel.channelOrder"
+          b.avatar "user.avatar"
         FROM
           article a
         LEFT JOIN `user` b on a.author = b.username
-        LEFT JOIN channel c on a.channel_name = c.channel_name
-          <where>
-              <if test="channelName != null">
-                  a.channel_name = #{channelName}
-                  ORDER BY a.create_date desc,a.view_count desc
-              </if>
-              <if test="themeName != null">
-                  a.theme_name = #{themeName}
-                  ORDER BY a.create_date desc,a.view_count desc
-              </if>
-              <if test="siteName != null">
-                  a.site_name = #{siteName}
-                  ORDER BY a.create_date desc,a.view_count desc
-              </if>
-              <if test="author != null">
-                  a.author = #{author}
-                  ORDER BY a.create_date desc,a.view_count desc
-              </if>
-          </where>
+        WHERE 1=1
+        <if test="themeName != null">
+            AND theme_name = #{themeName}
+        </if>
+        <if test="author != null">
+            AND author = #{author}
+        </if>
+          ORDER BY a.create_date DESC
           <if test="pageNo != null">
               LIMIT #{pageNo}
               <if test="pageSize != null">
@@ -106,72 +92,8 @@
           </if>
     </select>
 
-    <!--随机获取当天的文章-->
-    <select id="findArticleByRand" resultType="com.tell.model.Article">
-        SELECT
-          a.article_id,
-          a.channel_name,
-          a.theme_name,
-          a.site_name,
-          a.title,
-          a.excerpt,
-          a.author,
-          a.avatar,
-          a.article_url,
-          a.view_count,
-          a.reply_count,
-          a.last_reply_author,
-          a.last_reply_time,
-          a.top,
-          a.good,
-          a.is_delete,
-          a.show_content,
-          a.create_date,
-          a.update_date,
-          a.weight,
-          a.up,
-          a.down,
-          b.user_id "user.userId",
-          b.username "user.username",
-          b.avatar "user.avatar",
-          c.channel_id "channel.channelId",
-          c.channel_name "channel.channelName",
-          c.channel_order "channel.channelOrder"
-        FROM
-          article a
-        LEFT JOIN `user` b on a.author = b.username
-        LEFT JOIN channel c on a.channel_name = c.channel_name
-        <!--<where>
-            TO_DAYS(a.create_date) = TO_DAYS(NOW())
-        </where>-->
-        ORDER BY
-          a.weight DESC ,a.create_date DESC
-        <if test="pageNo != null">
-            LIMIT #{pageNo}
-            <if test="pageSize != null">
-                ,#{pageSize}
-            </if>
-        </if>
-    </select>
-
-    <!--查询最新的文章-->
-    <select id="findArticleOderByDateDesc" resultType="com.tell.model.Article">
-        SELECT
-          <include refid="Base_Column_List2"/>
-        FROM
-          article
-        ORDER BY
-          create_date desc
-        <if test="pageNo != null">
-            LIMIT #{pageNo}
-            <if test="pageSize != null">
-                ,#{pageSize}
-            </if>
-        </if>
-    </select>
-
     <!--查询weight最高的文章-->
-    <select id="findArticleOderByViewCountDesc" resultType="com.tell.model.Article">
+    <select id="selectArticleByWeight" resultType="com.tell.model.Article">
         SELECT
         <include refid="Base_Column_List2"/>
         FROM
@@ -180,95 +102,6 @@
         avatar is not NULL
         ORDER BY
         weight desc,create_date desc
-        <if test="pageNo != null">
-            LIMIT #{pageNo}
-            <if test="pageSize != null">
-                ,#{pageSize}
-            </if>
-        </if>
-    </select>
-
-    <!--查询指定站点的文章-->
-    <select id="findArticleInSite" resultType="com.tell.model.Article">
-        SELECT
-          a.article_id,
-          a.channel_name,
-          a.theme_name,
-          a.site_name,
-          a.title,
-          a.excerpt,
-          a.author,
-          a.avatar,
-          a.article_url,
-          a.view_count,
-          a.reply_count,
-          a.last_reply_author,
-          a.last_reply_time,
-          a.top,
-          a.good,
-          a.is_delete,
-          a.show_content,
-          a.create_date,
-          a.update_date,
-          a.weight,
-          a.up,
-          a.down,
-          b.user_id "user.userId",
-          b.username "user.username",
-          b.avatar "user.avatar"
-        FROM
-          article a
-        LEFT JOIN `user` b on a.author = b.username
-        <where>
-              a.site_name in ('V2EX')
-              ORDER BY a.create_date desc,a.view_count desc
-        </where>
-        <if test="pageNo != null">
-            LIMIT #{pageNo}
-            <if test="pageSize != null">
-                ,#{pageSize}
-            </if>
-        </if>
-    </select>
-
-    <!--查询作者的其他文章-->
-    <select id="findAuthorOtherArticle" resultType="com.tell.model.Article">
-        SELECT
-        a.article_id,
-        a.channel_name,
-        a.theme_name,
-        a.site_name,
-        a.title,
-        a.excerpt,
-        a.author,
-        a.avatar,
-        a.article_url,
-        a.view_count,
-        a.reply_count,
-        a.last_reply_author,
-        a.last_reply_time,
-        a.top,
-        a.good,
-        a.is_delete,
-        a.show_content,
-        a.create_date,
-        a.update_date,
-        a.weight,
-        a.up,
-        a.down,
-        b.user_id "user.userId",
-        b.username "user.username",
-        b.avatar "user.avatar"
-        FROM
-        article a
-        LEFT JOIN `user` b on a.author = b.username
-        <where>
-            <if test="author != null">
-                a.author = #{author}
-                AND a.article_id != #{currentArticleId}
-                ORDER BY a.create_date desc
-            </if>
-        </where>
         <if test="pageNo != null">
             LIMIT #{pageNo}
             <if test="pageSize != null">
@@ -332,38 +165,16 @@
             article_id = #{articleId}
     </update>
 
-    <!--根据频道、主题、站点、作者统计文章数量-->
+    <!--根据主题、作者统计文章数量-->
     <select id="countArticle" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM article
         <where>
-            <if test="channelName != null">
-                channel_name = #{channelName}
-            </if>
             <if test="themeName != null">
                 theme_name = #{themeName}
-            </if>
-            <if test="siteName != null">
-                site_name = #{siteName}
             </if>
             <if test="author != null">
                 author = #{author}
             </if>
-        </where>
-    </select>
-
-    <!--统计当天的文章数量-->
-    <select id="countToday" resultType="java.lang.Integer">
-        SELECT COUNT(1) FROM article
-        <!--<where>
-            TO_DAYS(create_date) = TO_DAYS(NOW())
-        </where>-->
-    </select>
-
-    <!--统计指定站点的文章-->
-    <select id="countInSite" resultType="java.lang.Integer">
-        SELECT COUNT(1) FROM article
-        <where>
-            site_name in ('V2EX')
         </where>
     </select>
 

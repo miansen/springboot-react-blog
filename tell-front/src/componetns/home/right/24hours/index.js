@@ -21,10 +21,10 @@ class Hours24 extends Component{
 
     componentWillMount(){
         if(this.state.article.length === 0){
-            Axios.get("/articles/24news").then(({data}) => {
+            Axios.get("/articles").then(({data}) => {
                 if(data.code === 200){
                     this.setState({
-                        article: data.detail
+                        article: data.detail.content
                     });
                 }else{
                     {openNotificationWithIcon("error","Error",data.description)}

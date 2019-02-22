@@ -14,69 +14,26 @@ import java.util.List;
 public interface ArticleMapper {
 
     /**
-     * 根据频道、主题、站点、作者获取文章
-     * @param channelName
+     * 根据主题、作者获取文章
      * @param themeName
-     * @param siteName
      * @param author
      * @param pageNo
      * @param pageSize
      * @return
      */
-    List<Article> findArticle(@Param("channelName") String channelName,
-                              @Param("themeName") String themeName,
-                              @Param("siteName") String siteName,
+    List<Article> findArticle(@Param("themeName") String themeName,
                               @Param("author") String author,
                               @Param("pageNo") Integer pageNo,
                               @Param("pageSize") Integer pageSize
     );
 
     /**
-     * 随机获取当天的文章
+     * 查询weight最高的文章
      * @param pageNo
      * @param pageSize
      * @return
      */
-    List<Article> findArticleByRand(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
-
-
-    /**
-     * 查询最新的文章
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
-    List<Article> findArticleOderByDateDesc(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
-
-    /**
-     * 查询点击次数最多的文章
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
-    List<Article> findArticleOderByViewCountDesc(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
-
-    /**
-     * 查询指定站点的文章
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
-    List<Article> findArticleInSite(@Param("pageNo") Integer pageNo,
-                                    @Param("pageSize") Integer pageSize);
-
-    /**
-     * 查询作者的其他文章
-     * @param author: 作者
-     * @param currentArticleId: 当前文章ID
-     * @param pageNo
-     * @param pageSize
-     * @return
-     */
-    List<Article> findAuthorOtherArticle(@Param("author") String author,
-                                         @Param("currentArticleId") Integer currentArticleId,
-                                         @Param("pageNo") Integer pageNo,
-                                         @Param("pageSize") Integer pageSize);
+    List<Article> selectArticleByWeight(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
 
     /**
      * 根据ID查询文章
@@ -86,30 +43,14 @@ public interface ArticleMapper {
     Article selectById(@Param("id") Integer id);
 
     /**
-     * 根据频道、主题、站点、作者统计文章数量
-     * @param channelName
+     * 根据主题、作者统计文章数量
      * @param themeName
-     * @param siteName
      * @param author
      * @return
      */
-    int countArticle(@Param("channelName") String channelName,
-                     @Param("themeName") String themeName,
-                     @Param("siteName") String siteName,
+    int countArticle(@Param("themeName") String themeName,
                      @Param("author") String author
     );
-
-    /**
-     * 统计当天的文章数量
-     * @return
-     */
-    int countToday();
-
-    /**
-     * 统计指定站点的文章
-     * @return
-     */
-    int countInSite();
 
     /**
      * 更新文章

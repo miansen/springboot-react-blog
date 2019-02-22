@@ -26,13 +26,13 @@ class Banner3 extends Component{
         if(this.state.article.length === 0){
             Axios.get("/articles/hot",{
                 params: {
-                    pageNo: 0,
+                    pageNo: 1,
                     pageSize: 5
                 }
             }).then(({data}) => {
                 if(data.code === 200){
                     this.setState({
-                        article: data.detail
+                        article: data.detail.content
                     });
                 }else{
                     {openNotificationWithIcon("error","Error",data.description)}

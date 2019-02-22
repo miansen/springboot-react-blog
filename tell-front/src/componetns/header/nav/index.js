@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TweenOne from 'rc-tween-one';
@@ -8,9 +7,6 @@ import { Menu,Dropdown,Icon,Avatar,Modal,Button } from 'antd';
 import './index.less';
 import Login from "../../login";
 import Register from '../../register/index';
-import Axios from "../../../axios/axios";
-import {openNotificationWithIcon} from "../../notification";
-import {updateChannelAndLoadData} from '../../../redux/index/action';
 import {loginAsync,RegisterAsync,logout} from '../../../redux/user/action';
 import connect from "react-redux/es/connect/connect";
 
@@ -25,66 +21,11 @@ class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            channel: [],
             phoneOpen: false, //是否打开导航菜单
             theme: "light ", //导航菜单的主题颜色
             visible: false, //登录窗口是否可见
             visibleRegister: false //注册窗口是否可见
         };
-    }
-
-    //渲染前加载
-    componentWillMount(){
-        this.fetchData();
-    }
-
-    //获取频道列表
-    fetchData(){
-        if(this.state.channel.length === 0 || this.state.loading){
-            Axios.get('/channels').then(({data}) => {
-                // console.log(data);
-                if(data.code === 200){
-                    this.setState({
-                        loading: false,
-                        channel: data.detail
-                    })
-                }else {
-                    {openNotificationWithIcon("error","Error",data.description)}
-                }
-            }).catch( error => {
-                {openNotificationWithIcon("error","Error",error.message)}
-            })
-        }
-    }
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    }
-
-    //切换频道
-    updateChannel(channelName){
-        const data = {
-            url: "/channel/articles",
-            channelName: channelName,
-            pageNo:1
-
-        }
-        this.props.updateChannelAndLoadData(data);
-        // 切换频道的同时跳转到首页
-        this.context.router.history.push('/')
-    }
-
-    //回到首页
-    goToIndex(){
-        const data = {
-            url: "/channel/articles",
-            channelName: "推荐",
-            pageNo:1
-
-        }
-        this.props.updateChannelAndLoadData(data);
-        // 跳转到首页
-        this.context.router.history.push('/')
     }
 
     //显示登录窗口
@@ -192,19 +133,6 @@ class Nav extends React.Component {
     }
 
     render() {
-        // console.log("登录用户名："+this.props.state.user.loginUsername)
-        // 频道列表
-        const menu = (
-            <Menu>
-                {
-                    this.state.channel.map((key,i) => (
-                        <Menu.Item>
-                            <a onClick={() => this.updateChannel(key.channelName)}>{key.channelName}</a>
-                        </Menu.Item>
-                    ))
-                }
-            </Menu>
-        );
         // 用户选项
         const userMenu = <Menu>
             <Menu.Item>
@@ -220,7 +148,6 @@ class Nav extends React.Component {
         const props = { ...this.props };
         const isMobile = props.isMobile;
         delete props.isMobile;
-        // const navData = { menu0: '首页', menu1: '主题', menu2: '站点', menu3: '登录' };
         const navData = { menu3: '登录',menu4: '注册'};
         const navChildren = Object.keys(navData)
             .map((key, i) => {
@@ -249,7 +176,7 @@ class Nav extends React.Component {
                 <Link to="/"><h2>Tell</h2></Link>
             </TweenOne>
             <div className="header1-nav">
-                <a onClick={() => this.goToIndex()} style={{paddingRight: "20px"}}>首页</a>
+                <Link to="/" style={{paddingRight: "20px"}}>首页</Link>
                 <Link to="/themes" className="create-article">发现</Link>
             </div>
             {isMobile ? (<div
@@ -341,7 +268,6 @@ export default connect(
         state: state
     }),
     {
-        updateChannelAndLoadData: updateChannelAndLoadData,
         loginAsync: loginAsync,
         registerAsync: RegisterAsync,
         logout: logout

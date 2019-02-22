@@ -1,7 +1,6 @@
 package com.tell.model;
 
 import org.springframework.data.annotation.Id;
-
 import java.util.Date;
 
 /**
@@ -62,8 +61,6 @@ public class Article {
     private Integer down; //踩
 
     private User user;
-
-    private Channel channel;
 
     public Integer getArticleId() {
         return articleId;
@@ -273,14 +270,6 @@ public class Article {
         this.user = user;
     }
 
-    public Channel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
-
     @Override
     public String toString() {
         return "Article{" +
@@ -310,7 +299,6 @@ public class Article {
                 ", up=" + up +
                 ", down=" + down +
                 ", user=" + user +
-                ", channel=" + channel +
                 '}';
     }
 }

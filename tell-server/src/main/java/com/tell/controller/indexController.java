@@ -1,5 +1,6 @@
 package com.tell.controller;
 
+import com.tell.bean.Page;
 import com.tell.conf.properties.SiteConfig;
 import com.tell.bean.Result;
 import com.tell.exception.ApiAssert;
@@ -42,35 +43,24 @@ public class indexController {
     private JwtTokenUtil jwtTokenUtil;
 
     /**
-     * 根据频道获取文章
-     * @param pageNo
-     * @param channelName
-     * @return
-     */
-        @GetMapping(value = "/channel/articles")
-    private Result index(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
-                         @RequestParam(value = "channelName",required = false) String channelName){
-        return Result.success(articleService.page(pageNo, siteConfig.getPageSize(), channelName));
-    }
-
-    /**
      * 24小时
      * @return
      */
-    @GetMapping(value = "/articles/24news")
-    private Result TwentyFourHoursHotNews(){
-        List<Article> list = articleService.findArticleOderByDateDesc(0, 20);
-        return Result.success(list);
+    @GetMapping(value = "/articles")
+    private Result articles(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo){
+        Page<Article> page = articleService.page(pageNo, siteConfig.getPageSize());
+        return Result.success(page);
     }
 
     /**
-     * 热门新闻
+     * 热门文章
      * @return
      */
     @GetMapping(value = "/articles/hot")
     private Result hotNews(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
                            @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
-        return Result.success(articleService.findArticleOderByViewCountDesc(pageNo,pageSize));
+        Page<Article> page = articleService.pageByWeight(pageNo, pageSize);
+        return Result.success(page);
     }
 
     @PostMapping(value = "/register")

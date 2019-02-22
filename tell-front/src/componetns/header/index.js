@@ -3,10 +3,8 @@ import { enquireScreen } from 'enquire-js';
 import { Layout } from 'antd';
 
 import Nav from './nav/index';
-import Nav02 from './nav/Nav02';
 import './index.css';
 
-const TopHeader = Layout.Header;
 let isMobile;
 enquireScreen((b) => {
     isMobile = b;

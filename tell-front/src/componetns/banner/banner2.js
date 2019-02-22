@@ -25,7 +25,7 @@ class Banner2 extends Component{
             }).then(({data}) => {
                 if(data.code === 200){
                     this.setState({
-                        article: data.detail
+                        article: data.detail.content
                     });
                 }else{
                     {openNotificationWithIcon("error","Error",data.description)}

@@ -58,10 +58,9 @@ class Settings extends Component{
         return (
             <div className="content">
                 <Row>
-                    <Col xs={0} sm={0} md={0} lg={4} xl={4} xxl={4}></Col>
                     <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>
-                        <h2>个人设置</h2>
-                        <div style={{marginTop: "20px",marginBottom: "20px"}}>
+                        <div style={{marginBottom: "20px"}}>
+                            <h2>个人设置</h2>
                             <Tabs tabPosition="left">
                                 <TabPane tab="基本设置" key="1">
                                     <div>
@@ -147,7 +146,7 @@ class Settings extends Component{
                             </Tabs>
                         </div>
                     </Col>
-                    <Col xs={0} sm={0} md={0} lg={4} xl={4} xxl={4}></Col>
+                    <Col xs={0} sm={0} md={0} lg={8} xl={8} xxl={8}></Col>
                 </Row>
             </div>
         );

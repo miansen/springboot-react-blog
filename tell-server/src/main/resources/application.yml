@@ -9,10 +9,15 @@ spring:
     #  url: jdbc:mysql://127.0.0.1:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     #  driver-class-name: com.mysql.jdbc.Driver
 
-    username: root
-    password: Ms@972383371
-    url: jdbc:mysql://120.79.94.184:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
-    driver-class-name: com.mysql.jdbc.Driver
+    
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+    open-in-view: false
 
 mybatis:
   # 指定全局配置文件位置

@@ -32,7 +32,7 @@ export const indexLoadData = (data) => {
 export const indexLoadMore = (data) => {
     return dispatch => {
         dispatch(indexLoadMoreStart());
-        fetchMoreData(data.url,data.channelName,data.pageNo,dispatch);
+        fetchMoreData(data.url,data.pageNo,dispatch);
     }
 }
 

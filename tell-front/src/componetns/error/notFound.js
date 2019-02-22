@@ -21,7 +21,7 @@ class NotFound extends Component{
     render() {
         return (
             <Alert className="load-more" style={{marginTop: "20px",border: "0px",backgroundColor: "#ffffff"}}
-                   message="秘密基地被你发现了，可惜这里什么都没有... 去首页看新闻吧!"
+                   message="秘密基地被你发现了，可惜这里什么都没有..."
                    type="error" />
         )
     }

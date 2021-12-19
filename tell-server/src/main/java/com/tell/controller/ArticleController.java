@@ -5,6 +5,7 @@ import com.tell.exception.ApiAssert;
 import com.tell.model.Article;
 import com.tell.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -45,6 +46,11 @@ public class ArticleController {
     @PostMapping(value = "/article")
     public Result save(@RequestBody Article article){
         ApiAssert.notNull(article,"对象为空");
+        if (StringUtils.isEmpty(article.getArticleUrl())) {
+            article.setShowContent(Boolean.TRUE);
+        } else {
+            article.setShowContent(Boolean.FALSE);
+        }
         article.setCreateDate(new Date());
         article = articleService.save(article);
         return Result.success(article);

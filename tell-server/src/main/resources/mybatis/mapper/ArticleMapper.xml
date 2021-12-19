@@ -186,7 +186,8 @@
          excerpt,
          author,
          avatar,
-         create_date)
+         create_date,
+         show_content)
          VALUES
          (#{themeName},
           #{title},
@@ -194,6 +195,7 @@
           #{excerpt},
           #{author},
           #{avatar},
-          #{createDate})
+          #{createDate},
+          #{showContent})
     </insert>
 </mapper>

@@ -2,14 +2,10 @@ server:
   port: 8080
 
 spring:
-  datasource:
-    #  数据源基本配置
-    #  username: sen
-    #  password: 123
-    #  url: jdbc:mysql://127.0.0.1:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
-    #  driver-class-name: com.mysql.jdbc.Driver
+  profiles:
+    active: dev
 
-    
+
   jpa:
     database: mysql
     show-sql: true

@@ -1,0 +1,43 @@
+version: '3'
+services:
+  mysql:
+    container_name: blog-mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: tell
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Shanghai
+    expose:
+      - "3306"
+    volumes:
+      - ./tell-server/src/main/resources/db:/docker-entrypoint-initdb.d
+      - ./mysql/mysql_data:/var/lib/mysql
+    restart: always
+
+  server:
+    container_name: blog-server
+    build: .
+    working_dir: /app
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./tell-server/:/app
+      - ~/.m2:/root/.m2
+      - ./tell-server/logs:/app/logs
+    ports:
+      - "8090:8080"
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker -Dmaven.test.skip=true
+    restart: always
+
+  web:
+    image: nginx
+    ports:
+      - "3008:3008"
+    volumes:
+      - ./tell-front/build:/usr/share/nginx/html
+      - ./tell-front/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - mysql
+      - server
+    restart: always

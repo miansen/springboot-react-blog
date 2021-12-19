@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(username);
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         user.setEmail(email);
-        user.setAvatar("https://static.tuzixinwen.com/images/default-avatar.jpg");
+        user.setAvatar("https://wx4.sinaimg.cn/large/b8fbd005gy1gxicusldztj20i20i2glv.jpg");
         user.setSignature("这家伙很懒，什么都没留下");
         user.setUserUrl("/user/"+username);
         user.setScore(0);

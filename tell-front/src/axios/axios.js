@@ -7,7 +7,7 @@ import qs from 'qs';
  * @description: 封装axios
  */
 const Axios = axios.create({
-    baseURL: 'http://localhost:8080' //设置访问路径
+    baseURL: 'http://server:8080' //设置访问路径
     // baseURL: 'https://api.tuzixinwen.com'
 });
 

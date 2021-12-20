@@ -94,12 +94,11 @@ yarn start
 
 3.修改 `axios.js` 配置
 
-打开文件 `tell-front/src/axios/axios.js`，修改你服务器的 IP，这是前端访问后端的接口。端口不要改。
+打开文件 `tell-front/src/axios/axios.js`，修改后端接口的配置。将 `localhost` 修改成你服务器的域名或者 IP，将端口 `8080` 改成 `8090`。
 
 ```
 const Axios = axios.create({
-	// 将 localhost 改成你服务器的 IP
-    baseURL: 'http://localhost:8090'
+    baseURL: 'http://localhost:8080'
 });
 ```
 

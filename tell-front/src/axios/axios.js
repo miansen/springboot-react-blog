@@ -7,8 +7,8 @@ import qs from 'qs';
  * @description: 封装axios
  */
 const Axios = axios.create({
-    baseURL: 'http://server:8080' //设置访问路径
-    // baseURL: 'https://api.tuzixinwen.com'
+	// 接口访问路径
+    baseURL: 'http://localhost:8090'
 });
 
 Axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token");
